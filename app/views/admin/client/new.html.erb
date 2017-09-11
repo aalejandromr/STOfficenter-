@@ -1,0 +1,178 @@
+<!-- page content -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.extensions.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.numeric.extensions.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.date.extensions.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.phone.extensions.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/phone-codes/phone.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/phone-codes/phone-be.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/phone-codes/phone-ru.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/css/inputmask.min.css">
+
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>CREATE NEW CLIENT</h3>
+      </div>
+
+      <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">Go!</button>
+                          </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel" style="min-height: 600px;">
+          <div class="x_title">
+            <h2>New Client</h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Settings 1</a>
+                  </li>
+                  <li><a href="#">Settings 2</a>
+                  </li>
+                </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix">
+              
+            </div>
+          </div>
+          <div class="x_body">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#datos_empresa" role="tab">Datos Empresa</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#datos_contacto" role="tab">Datos Contacto</a>
+            </li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+              <div class="tab-pane active" id="datos_empresa" role="tabpanel">
+                <div id="Datos" class="tab-pane fade in">
+               <%= form_for Client.new, as: :client, url: "/admin/client", method: :post, html: { class: "new_client", id: "new_client" } do |f| %>
+                  <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                      <%= f.label :rec_id,"SERIAL:"%>
+                      <%= f.text_field :rec_id,:readonly => true, class: 'form-control', value: "CLNT0000000#{Client.maximum(:id).to_i + 1}"%>
+                      <%= f.label :nombre,"Nombre Completo:"%>
+                      <%= f.text_field :nombre ,  required: true, class: 'form-control', placeholder: 'Nombre' %>
+                      <%= f.label :dui,"No DUI:"%>
+                      <%= f.text_field :dui, required: true, class: 'form-control', placeholder: 'DUI' %>
+                      <label id="client_dui-error" class="error fade in" for="client_nombre" style="display: none;">This field is required.</label>
+                      <%= f.label :nit,"No NIT:"%>
+                      <%= f.text_field :nit, class: 'form-control', placeholder: 'NIT', required: true%>
+                      <label id="client_nit-error" class="error fade in" for="client_nombre" style="display: none;">This field is required.</label>
+                      <%= f.label :giroEmpresa,"GIRO DE LA EMPRESA:"%>
+                      <%= f.text_field :giroEmpresa, class: 'form-control', placeholder: 'Giro de la Empresa'%>
+                      <%= f.label :cantidadEmpleados,"CANTIDAD DE EMPLEADOS:"%>
+                      <%= f.number_field :cantidadEmpleados, class: 'form-control', placeholder: 'Cantidad de Empleados'%>
+                      <%= f.label :fecha_de_constitucion,"FECHA DE CONSTITUCION DE LA EMPRESA:"%>
+                      <%= f.date_field :fecha_de_constitucion, class: 'form-control'%>
+                      <%= f.label :empresaNacional,"Es empresa Nacional? "%>
+                      <%= select_tag(:empresaNacional, options_for_select([['True', 1], ['False', 2], ['Select one please', 3]], 3), {:class => 'form-control'})  %>
+                      <%= f.label :tipoPersona_id,"TIPO PERSONA: "%>
+                      <%= select_tag(:tipoPersona_id, options_for_select([['Natural', 1], ['Juridica', 2], ['Select one please', 3]], 3), {:class => 'form-control'})  %>
+                      <%= f.label :pais_origen_id,"PAIS DE ORIGEN:"%>
+                      <%= collection_select(:paisorigen, :pais_origen_id, PaisOrigen.all, :id, :name_with_initial, {:prompt=>true}, {:class=>'form-control'}) -%>
+                      <%= f.submit "Crear", class: 'btn btn-primary submit' %>
+                    <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="datos_contacto" role="tabpanel">
+                <div id="Datos" class="tab-pane fade in">
+               <%= form_for Contact.new, as: :client, url: "/admin/client", method: :post, html: { class: "new_client", id: "new_client" } do |f| %>
+                  <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                      <%= f.label :rec_id,"SERIAL:"%>
+                      <%= f.text_field :rec_id,:readonly => true, class: 'form-control', value: "CNT0000000#{Contact.maximum(:id).to_i + 1}"%>
+                      <%= f.label :first_name,"Nombre Completo:"%>
+                      <%= f.text_field :first_name ,  required: true, class: 'form-control', placeholder: 'Nombre' %>
+                      <%= f.label :middle_name,"Nombre Completo:"%>
+                      <%= f.text_field :middle_name ,  required: true, class: 'form-control', placeholder: 'Nombre' %>
+                      <%= f.label :last_name,"Nombre Completo:"%>
+                      <%= f.text_field :last_name ,  required: true, class: 'form-control', placeholder: 'Nombre' %>
+                      <%= f.label :sur_name,"Nombre Completo:"%>
+                      <%= f.text_field :sur_name ,  required: true, class: 'form-control', placeholder: 'Nombre' %>
+                      <%= f.label :phone_contact,"No DUI:"%>
+                      <%= f.text_field :phone_contact, required: true, class: 'form-control', placeholder: 'DUI' %>
+                      <label id="client_dui-error" class="error fade in" for="client_nombre" style="display: none;">This field is required.</label>
+                      <%= f.label :mobil_contact,"No NIT:"%>
+                      <%= f.text_field :mobil_contact, class: 'form-control', placeholder: 'NIT', required: true%>
+                      <label id="client_nit-error" class="error fade in" for="client_nombre" style="display: none;">This field is required.</label>
+                      <%= f.label :email,"GIRO DE LA EMPRESA:"%>
+                      <%= f.text_field :email, class: 'form-control', placeholder: 'Giro de la Empresa'%>
+                      <%= f.label :position_id,"Posicion en la que trabaja:"%>
+                      <%= collection_select(:position, :position_id, Position.all, :id, :name_with_initial, {:prompt=>true}, {:class=>'form-control'}) -%>
+                      <%= f.submit "Crear", class: 'btn btn-primary submit' %>
+                    </div>
+                  </div>
+                </div>
+                <% end %>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    $("#client_dui").inputmask("99999999-9", 
+      { 
+        "onincomplete":  function(){ 
+          $("#client_dui-error").show();
+          $("#client_dui-error").html("Must be like ########-#");
+        } 
+      });
+    $("#client_nit").inputmask("9999-999999-999-9", { 
+        "onincomplete":  function(){ 
+          $("#client_nit-error").show();
+          $("#client_nit-error").html("Must be like ####-######-###-#");
+        } 
+      });
+    //$("#new_client").validate();
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

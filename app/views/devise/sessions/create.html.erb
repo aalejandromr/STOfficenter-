@@ -1,0 +1,73 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? yield(:title) : "GentelellaOnRails" %> </title>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style type="text/css">
+    h2 {
+      font: 400 25px Helvetica,Arial,sans-serif;
+      letter-spacing: -.05em;
+      line-height: 20px;
+      margin: 10px 0 30px;
+      text-align: left;
+    }
+
+    body {
+      background: #F7F7F7;
+    }
+
+    .login_content form input[type="submit"], #content form .submit {
+    float: left;
+    margin-left: 0px;
+    }
+  </style>
+</head>
+
+<body class="nav-md">
+<div class="container body">
+  <% flash.each do |key, value| %>
+      <div align="center" id="flash" class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+  <a class="hiddenanchor" id="toregister"></a>
+  <a class="hiddenanchor" id="tologin"></a>
+
+  <div id="wrapper">
+    <div id="login" class="animate form">
+      <section class="login_content">
+        <h2>Inicio de sesion</h2>
+        <%= form_for(@user, as: resource_name, url: session_path(@user)) do |f| %>
+          <div class="field">
+            <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Usuario' %>
+          </div>
+
+          <div class="field">
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password' %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "ENTRAR", class: 'btn btn-primary submit' %>
+            <%= render "devise/shared/links" %>
+          </div>
+        <% end %>
+        
+        <!-- form -->
+      </section>
+      <!-- content -->
+    </div>
+  </div>
+</div>
+
+
+
+  <%= javascript_include_tag 'footermanifest', 'data-turbolinks-track' => true %>
+
+</body>
+</html>

@@ -5,6 +5,20 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
    root 'plainpage#index'
 
+   Rails.application.routes.draw do
+      devise_for :users, controllers: {
+        sessions: 'users/sessions'
+      }
+    end
+
+    namespace :admin do
+      resources :admin, :client
+    end
+
+
+   #Devise Configuration
+
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -1,0 +1,32 @@
+// Place all the styles related to the Admin::client controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.x_body label {
+	line-height: 2.471;
+}
+
+.btn.btn-primary.submit {
+	margin-top: 20px;
+}
+
+label.error {
+	position: absolute;
+    margin-left: -166px;
+    margin-top: -43px;
+    /* display: none; */
+    background: #d50019;
+    color: white;
+    padding: 9px;
+    border-radius: 36px;
+}
+
+#client_dui-error {
+	margin-left: -188px !important;
+}
+
+#client_nit-error {
+	margin-left: -230px;
+}
+
+    

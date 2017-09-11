@@ -1,5 +1,6 @@
 class PlainpageController < ApplicationController
-
+	before_action :authenticate_user!
+  
   def index
     flash[:success ] = "Success Flash Message: Welcome to GentellelaOnRails"
     #other alternatives are
