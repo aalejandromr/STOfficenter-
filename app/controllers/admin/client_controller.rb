@@ -11,7 +11,8 @@ class Admin::ClientController < ApplicationController
 	end
 
 	def create
-		cliente = params[:client]           
+		cliente = params[:client]   
+		abort(cliente)        
 		result = Client.create(
 			nombre: cliente[:nombre], 
 			dui: cliente[:dui], 
