@@ -80,6 +80,11 @@
                       <%= f.text_field :nombre ,  required: true, class: 'form-control', placeholder: 'Nombre Empresa' %>
                       <%= f.label :giroEmpresa,"GIRO DE LA EMPRESA:"%>
                       <%= f.text_field :giroEmpresa, class: 'form-control', placeholder: 'Giro de la Empresa'%>
+                      <%= f.label :nombre_comercial, "Nombre Comercial:"%>
+                      <%= f.text_field :nombre_comercial , class: 'form-control', placeholder: 'Nombre Comercial' %>
+                      <%= f.label :nit,"No NIT Empresa:"%>
+                      <%= f.text_field :nit, class: 'form-control', placeholder: 'NIT', required: true%>
+                      
                       <%= f.label :cantidadEmpleados,"CANTIDAD DE EMPLEADOS:"%>
                       <%= f.number_field :cantidadEmpleados, class: 'form-control', placeholder: 'Cantidad de Empleados'%>
                       <%= f.label :fecha_de_constitucion,"FECHA DE CONSTITUCION DE LA EMPRESA:"%>
@@ -88,6 +93,20 @@
                       <%= select_tag(:empresaNacional, options_for_select([['True', 1], ['False', 2], ['Select one please', 3]], 3), {:class => 'form-control'})  %>
                       <%= f.label :pais_origen_id,"PAIS DE ORIGEN:"%>
                       <%= collection_select(:paisorigen, :pais_origen_id, PaisOrigen.all, :id, :name_with_initial, {:prompt=>true}, {:class=>'form-control'}) -%>
+                      <%= f.label :representante_legal,"Representante Legal:"%>
+                      <%= f.text_field :representante_legal, class: 'form-control', placeholder: 'Representante Legal' %>      
+                      <%= f.label :oficina_actual,"Posee Oficina?"%>
+                      <%= select_tag(:oficina_actual, options_for_select([['True', 1], ['False', 2], ['Select one please', 3]], 3), {:class => 'form-control'})  %>
+                      <%= f.label :correo,"Correo Empresarial:"%>
+                      <%= f.text_field :correo, class: 'form-control', placeholder: 'Correo Empresarial' %>
+                      <%= f.label :telefono,"Telefono:"%>
+                      <%= f.text_field :telefono, class: 'form-control', placeholder: 'Telefono' %>
+                      <%= f.label :pagina_web,"Pagina Web Empresarial:"%>
+                      <%= f.text_field :pagina_web , class: 'form-control', placeholder: 'Pagina Web Empresarial' %>
+                      <%= f.label :domicilio_fiscal,"Domicilio Fiscal:"%>
+                      <%= f.text_field :domicilio_fiscal , required: true, class: 'form-control', placeholder: 'Domicilio Fiscal' %>
+                      <%= f.label :registro_fiscal,"No NRF:"%>
+                      <%= f.text_field :registro_fiscal, class: 'form-control', placeholder: 'NRF', required: true%>
                       <%= f.submit "Crear", class: 'btn btn-primary submit' %>
                     <% end %>
                     </div>
