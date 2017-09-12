@@ -1,3 +1,4 @@
+=begin
 Position.create!([
   {description: "Secretaria"},
   {description: "Programador"}
@@ -219,9 +220,8 @@ User.create!([
   {name: "Administrador", description: nil, surname: nil, user_name: nil, password: "2e3a55ddb1b933e1a358ef57ebed4b07", rol_id: 2, email: "administrador@administrador.com", encrypted_password: "2e3a55ddb1b933e1a358ef57ebed4b07", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 8, current_sign_in_at: "2017-09-10 20:02:15", last_sign_in_at: "2017-09-09 04:48:51", current_sign_in_ip: "::1", last_sign_in_ip: "::1"},
   {name: "Usuario", description: "Usuario normal", surname: nil, user_name: nil, password: "c0dde08d50ef1c554d6f36513e5e3e36", rol_id: 3, email: "usuario@usuario.com", encrypted_password: "c0dde08d50ef1c554d6f36513e5e3e36", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil}
 ])
-User.create!([
-  {name: "Administrador", description: nil, surname: nil, user_name: nil, password: "123", rol_id: 2, email: "administrador2@administrador.com", encrypted_password: "123", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 8, current_sign_in_at: "2017-09-10 20:02:15", last_sign_in_at: "2017-09-09 04:48:51", current_sign_in_ip: "::1", last_sign_in_ip: "::1"}
-])
+
+
 Ciudad.create!([
   {description: "Ahuachapán", pais_origens_id: 1},
   {description: "Jujutla", pais_origens_id: 1},
@@ -1413,4 +1413,9 @@ Ciudad.create!([
   {description: "Tecoluca", pais_origens_id: 1},
   {description: "Tepetitán", pais_origens_id: 1},
   {description: "Verapaz", pais_origens_id: 1}
+])
+=end
+
+User.create!([
+  {name: "Administrador", description: nil, surname: nil, user_name: nil, password: "123", rol_id: 2, email: "administrador2@administrador.com", encrypted_password: "123", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 8, current_sign_in_at: "2017-09-10 20:02:15", last_sign_in_at: "2017-09-09 04:48:51", current_sign_in_ip: "::1", last_sign_in_ip: "::1"}
 ])
