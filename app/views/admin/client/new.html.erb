@@ -76,7 +76,8 @@
                     <div class="col-md-6 col-md-offset-3">
                       <%= f.label :rec_id,"SERIAL:"%>
                       <%= f.text_field :rec_id,:readonly => true, class: 'form-control', value: "CLNT0000000#{Client.maximum(:id).to_i + 1}"%>
-
+                      <%= f.label :nombre,"Nombre Empresa:"%>
+                      <%= f.text_field :nombre ,  required: true, class: 'form-control', placeholder: 'Nombre Empresa' %>
                       <%= f.submit "Crear", class: 'btn btn-primary submit' %>
                     <% end %>
                     </div>
