@@ -47,11 +47,17 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+#production:
+#      adapter: postgresql
+#      database: jennifer_contratos_production
+#      pool: 5
+#      timeout: 5000
+
 production:
-      adapter: postgresql
-      database: jennifer_contratos_production
-      pool: 5
-      timeout: 5000
+  <<: *default
+  database: jennifer_contratos_development
+  username: root
+  password: root
 
 
 
