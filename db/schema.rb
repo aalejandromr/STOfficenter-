@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170909035159) do
+ActiveRecord::Schema.define(version: 20170912032600) do
+
+  create_table "calles", force: :cascade do |t|
+    t.string   "description", limit: 255
+    t.integer  "ciudads_id",  limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "ciudads", force: :cascade do |t|
+    t.string   "description",     limit: 255
+    t.integer  "pais_origens_id", limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
 
   create_table "client_contacts", force: :cascade do |t|
     t.integer  "clients_id",  limit: 4
@@ -22,10 +36,8 @@ ActiveRecord::Schema.define(version: 20170909035159) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "nombre",                limit: 255,              null: false
-    t.string   "dui",                   limit: 255, default: "", null: false
     t.string   "nit",                   limit: 255, default: "", null: false
     t.string   "giroEmpresa",           limit: 255
-    t.integer  "tipoPersona_id",        limit: 4
     t.integer  "cantidadEmpleados",     limit: 4
     t.date     "fecha_de_constitucion"
     t.boolean  "empresaNacional"
@@ -33,10 +45,19 @@ ActiveRecord::Schema.define(version: 20170909035159) do
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
     t.string   "rec_id",                limit: 255
+    t.string   "nombre_comercial",      limit: 255
+    t.string   "registro_fiscal",       limit: 255
+    t.string   "domicilio_fiscal",      limit: 255
+    t.string   "pagina_web",            limit: 255
+    t.string   "representante_legal",   limit: 255
+    t.string   "correo",                limit: 255
+    t.string   "telefono",              limit: 255
+    t.boolean  "oficina_actual"
+    t.integer  "direccion_id",          limit: 4
   end
 
+  add_index "clients", ["direccion_id"], name: "index_clients_on_direccion_id", using: :btree
   add_index "clients", ["pais_origen_id"], name: "fk_rails_b8f6afd9a5", using: :btree
-  add_index "clients", ["tipoPersona_id"], name: "fk_rails_731c1ea404", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.text     "first_name",    limit: 65535
@@ -54,8 +75,30 @@ ActiveRecord::Schema.define(version: 20170909035159) do
 
   add_index "contacts", ["position_id"], name: "fk_rails_fd87a032bf", using: :btree
 
+  create_table "direccion_clients", force: :cascade do |t|
+    t.integer  "direccions_id", limit: 4
+    t.integer  "clients_id",    limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "direccions", force: :cascade do |t|
+    t.integer  "pais_origens_id", limit: 4
+    t.integer  "ciudads_id",      limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "ubicacion",       limit: 255
+  end
+
   create_table "pais_origens", force: :cascade do |t|
     t.string   "description", limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.string   "description", limit: 255
+    t.integer  "calles_id",   limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -103,8 +146,8 @@ ActiveRecord::Schema.define(version: 20170909035159) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["rol_id"], name: "index_users_on_rol_id", using: :btree
 
+  add_foreign_key "clients", "direccions"
   add_foreign_key "clients", "pais_origens"
-  add_foreign_key "clients", "tipoPersonas"
   add_foreign_key "contacts", "positions"
   add_foreign_key "users", "rols"
 end

@@ -76,24 +76,34 @@
                     <div class="col-md-6 col-md-offset-3">
                       <%= f.label :rec_id,"SERIAL:"%>
                       <%= f.text_field :rec_id,:readonly => true, class: 'form-control', value: "CLNT0000000#{Client.maximum(:id).to_i + 1}"%>
-                      <%= f.label :nombre,"Nombre Completo:"%>
-                      <%= f.text_field :nombre ,  required: true, class: 'form-control', placeholder: 'Nombre' %>
-                      <%= f.label :dui,"No DUI:"%>
-                      <%= f.text_field :dui, required: true, class: 'form-control', placeholder: 'DUI' %>
-                      <label id="client_dui-error" class="error fade in" for="client_nombre" style="display: none;">This field is required.</label>
-                      <%= f.label :nit,"No NIT:"%>
+                      <%= f.label :nombre,"Nombre Empresa:"%>
+                      <%= f.text_field :nombre ,  required: true, class: 'form-control', placeholder: 'Nombre Empresa' %>
+                      <%= f.label :nombre_comercial, "Nombre Comercial:"%>
+                      <%= f.text_field :nombre_comercial , class: 'form-control', placeholder: 'Nombre Comercial' %>
+                      <%= f.label :nit,"No NIT Empresa:"%>
                       <%= f.text_field :nit, class: 'form-control', placeholder: 'NIT', required: true%>
-                      <label id="client_nit-error" class="error fade in" for="client_nombre" style="display: none;">This field is required.</label>
+                      <%= f.label :registro_fiscal,"No NRF:"%>
+                      <%= f.text_field :registro_fiscal, class: 'form-control', placeholder: 'NRF', required: true%>
+                      <%= f.label :domicilio_fiscal,"Domicilio Fiscal:"%>
+                      <%= f.text_field :domicilio_fiscal , required: true, class: 'form-control', placeholder: 'Domicilio Fiscal' %>
                       <%= f.label :giroEmpresa,"GIRO DE LA EMPRESA:"%>
                       <%= f.text_field :giroEmpresa, class: 'form-control', placeholder: 'Giro de la Empresa'%>
+                      <%= f.label :pagina_web,"Pagina Web Empresarial:"%>
+                      <%= f.text_field :pagina_web , class: 'form-control', placeholder: 'Pagina Web Empresarial' %>
+                      <%= f.label :representante_legal,"Representante Legal:"%>
+                      <%= f.text_field :domicilio_fiscal, class: 'form-control', placeholder: 'Representante Legal' %>
+                      <%= f.label :correo,"Correo Empresarial:"%>
+                      <%= f.text_field :correo, class: 'form-control', placeholder: 'Correo Empresarial' %>
+                      <%= f.label :telefono,"Telefono:"%>
+                      <%= f.text_field :telefono, class: 'form-control', placeholder: 'Telefono' %>
                       <%= f.label :cantidadEmpleados,"CANTIDAD DE EMPLEADOS:"%>
                       <%= f.number_field :cantidadEmpleados, class: 'form-control', placeholder: 'Cantidad de Empleados'%>
+                      <%= f.label :oficina_actual,"Posee Oficina?"%>
+                      <%= select_tag(:oficina_actual, options_for_select([['True', 1], ['False', 2], ['Select one please', 3]], 3), {:class => 'form-control'})  %>
                       <%= f.label :fecha_de_constitucion,"FECHA DE CONSTITUCION DE LA EMPRESA:"%>
                       <%= f.date_field :fecha_de_constitucion, class: 'form-control'%>
                       <%= f.label :empresaNacional,"Es empresa Nacional? "%>
                       <%= select_tag(:empresaNacional, options_for_select([['True', 1], ['False', 2], ['Select one please', 3]], 3), {:class => 'form-control'})  %>
-                      <%= f.label :tipoPersona_id,"TIPO PERSONA: "%>
-                      <%= select_tag(:tipoPersona_id, options_for_select([['Natural', 1], ['Juridica', 2], ['Select one please', 3]], 3), {:class => 'form-control'})  %>
                       <%= f.label :pais_origen_id,"PAIS DE ORIGEN:"%>
                       <%= collection_select(:paisorigen, :pais_origen_id, PaisOrigen.all, :id, :name_with_initial, {:prompt=>true}, {:class=>'form-control'}) -%>
                       <%= f.submit "Crear", class: 'btn btn-primary submit' %>
@@ -127,6 +137,7 @@
                       <%= f.text_field :email, class: 'form-control', placeholder: 'Giro de la Empresa'%>
                       <%= f.label :position_id,"Posicion en la que trabaja:"%>
                       <%= collection_select(:position, :position_id, Position.all, :id, :name_with_initial, {:prompt=>true}, {:class=>'form-control'}) -%>
+
                       <%= f.submit "Crear", class: 'btn btn-primary submit' %>
                     </div>
                   </div>
@@ -152,6 +163,23 @@
           $("#client_dui-error").html("Must be like ########-#");
         } 
       });
+    $("#client_registro_fiscal").inputmask("999999-9", 
+      { 
+        "onincomplete":  function(){ 
+          $("#client_dui-error").show();
+          $("#client_dui-error").html("Must be like ########-#");
+        } 
+      });
+    $("#client_telefono").inputmask("9999-9999", 
+      { 
+        "onincomplete":  function(){ 
+          $("#client_dui-error").show();
+          $("#client_dui-error").html("Must be like ########-#");
+        } 
+      });
+    Inputmask("url").mask("#client_pagina_web");
+    Inputmask("email").mask("#client_correo");
+    
     $("#client_nit").inputmask("9999-999999-999-9", { 
         "onincomplete":  function(){ 
           $("#client_nit-error").show();
@@ -160,6 +188,8 @@
       });
     //$("#new_client").validate();
   });
+
+  
 </script>
 
 

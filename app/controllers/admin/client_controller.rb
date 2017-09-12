@@ -12,7 +12,17 @@ class Admin::ClientController < ApplicationController
 
 	def create
 		cliente = params[:client]
-		result = Client.create(nombre: cliente[:nombre], dui: cliente[:dui], nit: cliente[:nit], giroEmpresa: cliente[:giroEmpresa], tipoPersona_id: cliente[:tipoPersona_id], cantidadEmpleados: cliente[:cantidadEmpleados], fecha_de_constitucion: cliente[:fecha_de_constitucion], empresaNacional: params[:empresaNacional], pais_origen_id: params[:paisorigen][:pais_origen_id], rec_id: cliente[:rec_id])
+		result = Client.create(
+			nombre: cliente[:nombre], 
+			dui: cliente[:dui], 
+			nit: cliente[:nit], 
+			giroEmpresa: cliente[:giroEmpresa], 
+			tipoPersona_id: cliente[:tipoPersona_id], 
+			cantidadEmpleados: cliente[:cantidadEmpleados], 
+			fecha_de_constitucion: cliente[:fecha_de_constitucion], 
+			empresaNacional: params[:empresaNacional], 
+			pais_origen_id: params[:paisorigen][:pais_origen_id], 
+			rec_id: cliente[:rec_id])
 		if result
 			flash[:success ] = "Your client was successfully created."
 			redirect_to "/admin/client/new"
