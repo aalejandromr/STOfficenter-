@@ -1416,6 +1416,21 @@ Ciudad.create!([
 ])
 =end
 
-User.create!([
-  {name: "Administrador", description: nil, surname: nil, user_name: nil, password: "administrador2017", rol_id: 2, email: "administrador2@administrador.com", encrypted_password: "123", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 8, current_sign_in_at: "2017-09-10 20:02:15", last_sign_in_at: "2017-09-09 04:48:51", current_sign_in_ip: "::1", last_sign_in_ip: "::1"}
-])
+User.create(name: "Administrador", description: nil, surname: nil, user_name: nil, password: "administrador2017", rol_id: 2, email: "administrador2@administrador.com", encrypted_password: "123", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 8, current_sign_in_at: "2017-09-10 20:02:15", last_sign_in_at: "2017-09-09 04:48:51", current_sign_in_ip: "::1", last_sign_in_ip: "::1")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
