@@ -9,8 +9,8 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
   #   super
-    #user = User.where(email: params[:user]['email'], password: Digest::MD5.hexdigest(params[:user]['password'])).first
-    user = User.where(email: params[:user]['email'], password: params[:user]['password']).first
+    user = User.where(email: params[:user]['email'], encrypted_password: Digest::MD5.hexdigest(params[:user]['password'])).first
+    #user = User.where(email: params[:user]['email'], password: params[:user]['password']).first
 
     if user
       sign_in user
