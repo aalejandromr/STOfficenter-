@@ -69,7 +69,49 @@
 
           <!-- Tab panes -->
           <div class="tab-content">
-              
+              <div class="tab-pane active" id="datos_empresa" role="tabpanel">
+                <div id="Datos" class="tab-pane fade in">
+               <%= form_for Client.new, as: :client, url: "/admin/client", method: :post, html: { class: "new_client", id: "new_client" } do |f| %>
+                  <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                      <%= f.label :rec_id,"SERIAL:"%>
+                      <%= f.text_field :rec_id,:readonly => true, class: 'form-control', value: "CLNT0000000#{Client.maximum(:id).to_i + 1}"%>
+                      <%= f.label :nombre,"Nombre Empresa:"%>
+                      <%= f.text_field :nombre ,  required: true, class: 'form-control', placeholder: 'Nombre Empresa' %>
+                      <%= f.label :nombre_comercial, "Nombre Comercial:"%>
+                      <%= f.text_field :nombre_comercial , class: 'form-control', placeholder: 'Nombre Comercial' %>
+                      <%= f.label :nit,"No NIT Empresa:"%>
+                      <%= f.text_field :nit, class: 'form-control', placeholder: 'NIT', required: true%>
+                      <%= f.label :registro_fiscal,"No NRF:"%>
+                      <%= f.text_field :registro_fiscal, class: 'form-control', placeholder: 'NRF', required: true%>
+                      <%= f.label :domicilio_fiscal,"Domicilio Fiscal:"%>
+                      <%= f.text_field :domicilio_fiscal , required: true, class: 'form-control', placeholder: 'Domicilio Fiscal' %>
+                      <%= f.label :giroEmpresa,"GIRO DE LA EMPRESA:"%>
+                      <%= f.text_field :giroEmpresa, class: 'form-control', placeholder: 'Giro de la Empresa'%>
+                      <%= f.label :pagina_web,"Pagina Web Empresarial:"%>
+                      <%= f.text_field :pagina_web , class: 'form-control', placeholder: 'Pagina Web Empresarial' %>
+                      <%= f.label :representante_legal,"Representante Legal:"%>
+                      <%= f.text_field :domicilio_fiscal, class: 'form-control', placeholder: 'Representante Legal' %>
+                      <%= f.label :correo,"Correo Empresarial:"%>
+                      <%= f.text_field :correo, class: 'form-control', placeholder: 'Correo Empresarial' %>
+                      <%= f.label :telefono,"Telefono:"%>
+                      <%= f.text_field :telefono, class: 'form-control', placeholder: 'Telefono' %>
+                      <%= f.label :cantidadEmpleados,"CANTIDAD DE EMPLEADOS:"%>
+                      <%= f.number_field :cantidadEmpleados, class: 'form-control', placeholder: 'Cantidad de Empleados'%>
+                      <%= f.label :oficina_actual,"Posee Oficina?"%>
+                      <%= select_tag(:oficina_actual, options_for_select([['True', 1], ['False', 2], ['Select one please', 3]], 3), {:class => 'form-control'})  %>
+                      <%= f.label :fecha_de_constitucion,"FECHA DE CONSTITUCION DE LA EMPRESA:"%>
+                      <%= f.date_field :fecha_de_constitucion, class: 'form-control'%>
+                      <%= f.label :empresaNacional,"Es empresa Nacional? "%>
+                      <%= select_tag(:empresaNacional, options_for_select([['True', 1], ['False', 2], ['Select one please', 3]], 3), {:class => 'form-control'})  %>
+                      <%= f.label :pais_origen_id,"PAIS DE ORIGEN:"%>
+                      <%= collection_select(:paisorigen, :pais_origen_id, PaisOrigen.all, :id, :name_with_initial, {:prompt=>true}, {:class=>'form-control'}) -%>
+                      <%= f.submit "Crear", class: 'btn btn-primary submit' %>
+                    <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="tab-pane" id="datos_contacto" role="tabpanel">
                 <div id="Datos" class="tab-pane fade in">
                <%= form_for Contact.new, as: :client, url: "/admin/client", method: :post, html: { class: "new_client", id: "new_client" } do |f| %>
@@ -112,7 +154,7 @@
 </div>
 
 <script type="text/javascript">
-
+/*
   $(document).ready(function(){
     $("#client_dui").inputmask("99999999-9", 
       { 
@@ -147,7 +189,7 @@
     //$("#new_client").validate();
   });
 
-  
+  */
 </script>
 
 
