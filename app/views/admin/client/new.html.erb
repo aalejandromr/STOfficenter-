@@ -94,10 +94,7 @@
                       
                       <%= f.label :fecha_de_constitucion,"FECHA DE CONSTITUCION DE LA EMPRESA:"%>
                       <%= f.date_field :fecha_de_constitucion, class: 'form-control'%>
-                      <%= f.label :empresaNacional,"Es empresa Nacional? "%>
-                      <%= select_tag(:empresaNacional, options_for_select([['True', 1], ['False', 2], ['Select one please', 3]], 3), {:class => 'form-control'})  %>
-                      <%= f.label :,"PAIS DE ORIGEN:"%>
-                      <%= collection_select(:paisorigen, :pais_origen_id, PaisOrigen.all, :id, :name_with_initial, {:prompt=>true}, {:class=>'form-control'}) -%>
+
                       <%= f.submit "Crear", class: 'btn btn-primary submit' %>
                     <% end %>
                     </div>
