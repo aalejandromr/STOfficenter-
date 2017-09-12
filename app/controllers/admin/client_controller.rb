@@ -12,14 +12,11 @@ class Admin::ClientController < ApplicationController
 
 	def create
 		cliente = params[:client]   
-		abort(cliente)        
 		result = Client.create(
-			nombre: cliente[:nombre], 
-			dui: cliente[:dui], 
+			nombre: cliente[:nombre],  
 			nit: cliente[:nit],
 			nombre_comercial: cliente[:nombre_comercial], 
-			giroEmpresa: cliente[:giroEmpresa], 
-			tipoPersona_id: cliente[:tipoPersona_id], 
+			giroEmpresa: cliente[:giroEmpresa],  
 			cantidadEmpleados: cliente[:cantidadEmpleados], 
 			fecha_de_constitucion: cliente[:fecha_de_constitucion], 
 			empresaNacional: params[:empresaNacional], 
