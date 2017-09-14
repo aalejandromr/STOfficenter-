@@ -38,6 +38,8 @@ gem 'devise'
 # gem 'capistrano-rails', group: :development
 group :production do
 	gem 'pg', '0.20'
+	gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
+	gem 'sweet-alert2-rails'
 end
 
 group :development, :test do
