@@ -29,4 +29,15 @@ label.error {
 	margin-left: -230px;
 }
 
+.client-all, .client-all th {
+    text-align: center;
+}
     
+.client-all thead {
+    background: #2a3f54;
+    color: white;
+}
+
+.client-all tr {
+    border-bottom: 1px solid;
+}

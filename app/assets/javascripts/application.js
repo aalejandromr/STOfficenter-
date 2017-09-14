@@ -15,7 +15,8 @@
 
 //= require jquery_ujs
 //= require turbolinks
-
+//= require sweetalert2
+//= require sweet-alert2-rails
 //= require js/flot/jquery.flot.js
 //= require js/flot/jquery.flot.pie.js
 //= require js/flot/jquery.flot.orderBars.js
@@ -40,6 +41,6 @@
 //= require  js/nprogress.js
 
 //= require flash.js
-
+//= require_tree ./admin
 
 

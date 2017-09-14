@@ -24,7 +24,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel" style="height:600px;">
           <div class="x_title">
-            <h2>You have <%= "#{Client.count}"%> Clients</h2>
+            <h2>You have <%= "#{Client.count}"%> Client(s)</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -43,41 +43,38 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_body">
-          <table class="table">
+          <table class="table client-all">
             <thead>
               <tr>
                 <th>Correlativo</th>
-                <th>NOMBRE</th>
-                <th>DUI</th>
-                <th>NIT</th>
-                <th>Giro Empresa</th>
-                <th>Cantidad de Empleados</th>
-                <th>Fecha de constitucion</th>
+                <th>Nombre</th>
+                <th>Domicilio Fiscal</th>
+                <th>Pagina Web</th>
+                <th>Representante Legal</th>
+                <th>Correo</th>
+                <th>Telefono</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
             <% Client.all.each do |client| %>
                 <tr>
                 <th scope="row"> <%= client.rec_id %> </th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td><%= client.nombre %></td>
+                <td><%= client.domicilio_fiscal %></td>
+                <td> <a href="<%= client.pagina_web %>"> <%= client.pagina_web %></a></td>
+                <td><%= client.representante_legal %></td>
+                <td><%= client.correo %></td>
+                <td><%= client.telefono %></td>
+                <td> 
+
+                  <a id="<%= client.rec_id %>" href="#" class="info_action" href=""><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                  <a href="<%= edit_admin_client_path(client.rec_id) %>" class="edit_action"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                  <a href="" class="erase_action"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
               </tr>
-              <%= client.nombre %>
-            <% end %>
               
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
+            <% end %>
             </tbody>
           </table>
             

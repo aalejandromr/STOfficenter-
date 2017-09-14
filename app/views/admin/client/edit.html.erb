@@ -1,0 +1,170 @@
+<!-- page content -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.extensions.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.numeric.extensions.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.date.extensions.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.phone.extensions.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/phone-codes/phone.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/phone-codes/phone-be.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/phone-codes/phone-ru.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/css/inputmask.min.css">
+
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>CREATE NEW CLIENT</h3>
+      </div>
+
+      <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">Go!</button>
+                          </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel" style="min-height: 600px;">
+          <div class="x_title">
+            <h2>New Client</h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Settings 1</a>
+                  </li>
+                  <li><a href="#">Settings 2</a>
+                  </li>
+                </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix">
+              
+            </div>
+          </div>
+          <div class="x_body">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#datos_empresa" role="tab">Datos Empresa</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#datos_contacto" role="tab">Datos Contacto</a>
+            </li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+              <div class="tab-pane active" id="datos_empresa" role="tabpanel">
+                <div id="Datos" class="tab-pane fade in">
+               <%= form_for @ClientFound, as: :client, url: admin_client_path, method: :patch, html: { class: "new_client", id: "new_client" } do |f| %>
+                  <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                      <%= f.label :rec_id,"SERIAL:"%>
+                      <%= f.text_field :rec_id,:readonly => true, class: 'form-control', value: @ClientFound.rec_id%>
+                      <%= f.label :nombre,"Nombre Empresa:"%>
+                      <%= f.text_field :nombre ,  required: true, class: 'form-control', placeholder: 'Nombre Empresa' %>
+                      <%= f.label :giroEmpresa,"GIRO DE LA EMPRESA:"%>
+                      <%= f.text_field :giroEmpresa, class: 'form-control', placeholder: 'Giro de la Empresa'%>
+                      <%= f.label :nombre_comercial, "Nombre Comercial:"%>
+                      <%= f.text_field :nombre_comercial , class: 'form-control', placeholder: 'Nombre Comercial' %>
+                      <%= f.label :nit,"No NIT Empresa:"%>
+                      <%= f.text_field :nit, class: 'form-control', placeholder: 'NIT', required: true%>
+                      
+                      <%= f.label :cantidadEmpleados,"CANTIDAD DE EMPLEADOS:"%>
+                      <%= f.number_field :cantidadEmpleados, class: 'form-control', placeholder: 'Cantidad de Empleados'%>
+                      <%= f.label :fecha_de_constitucion,"FECHA DE CONSTITUCION DE LA EMPRESA:"%>
+                      <%= f.date_field :fecha_de_constitucion, class: 'form-control'%>
+                      <%= f.label :empresaNacional,"Es empresa Nacional? "%>
+                      <%= select_tag(:empresaNacional, options_for_select([['True', 1], ['False', 2], ['Select one please', 3]], @ClientFound.empresaNacional), {:class => 'form-control'})  %>
+                      <%= f.label :pais_origen_id,"PAIS DE ORIGEN:"%>
+                      <%= f.collection_select(:pais_origen_id, PaisOrigen.all, :id, :name_with_initial, {prompt: "Seleccione un Pais"}, {:required => true, :class=>'form-control'}) %>
+                      <%= f.label :representante_legal,"Representante Legal:"%>
+                      <%= f.text_field :representante_legal, class: 'form-control', placeholder: 'Representante Legal' %>      
+                      <%= f.label :oficina_actual,"Posee Oficina?"%>
+                      <%= select_tag(:oficina_actual, options_for_select([['True', 1], ['False', 2], ['Select one please', 3]], @ClientFound.oficina_actual), {:class => 'form-control'})  %>
+                      <%= f.label :correo,"Correo Empresarial:"%>
+                      <%= f.text_field :correo, class: 'form-control', placeholder: 'Correo Empresarial' %>
+                      <%= f.label :telefono,"Telefono:"%>
+                      <%= f.text_field :telefono, class: 'form-control', placeholder: 'Telefono' %>
+                      <%= f.label :pagina_web,"Pagina Web Empresarial:"%>
+                      <%= f.text_field :pagina_web , class: 'form-control', placeholder: 'Pagina Web Empresarial' %>
+                      <%= f.label :domicilio_fiscal,"Domicilio Fiscal:"%>
+                      <%= f.text_field :domicilio_fiscal , required: true, class: 'form-control', placeholder: 'Domicilio Fiscal' %>
+                      <%= f.label :registro_fiscal,"No NRF:"%>
+                      <%= f.text_field :registro_fiscal, class: 'form-control', placeholder: 'NRF', required: true%>
+                      <%= f.submit "Modificar", class: 'btn btn-primary submit' %>
+                    <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    $("#client_registro_fiscal").inputmask("999999-9", 
+      { 
+        "onincomplete":  function(){ 
+          $("#client_dui-error").show();
+          $("#client_dui-error").html("Must be like ########-#");
+        } 
+      });
+    $("#client_telefono").inputmask("9999-9999", 
+      { 
+        "onincomplete":  function(){ 
+          $("#client_dui-error").show();
+          $("#client_dui-error").html("Must be like ########-#");
+        } 
+      });
+    Inputmask("url").mask("#client_pagina_web");
+    Inputmask("email").mask("#client_correo");
+    
+    $("#client_nit").inputmask("9999-999999-999-9", { 
+        "onincomplete":  function(){ 
+          $("#client_nit-error").show();
+          $("#client_nit-error").html("Must be like ####-######-###-#");
+        } 
+      });
+    //$("#new_client").validate();
+  });
+
+  
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
