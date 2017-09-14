@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
 
     namespace :admin do
-      resources :admin, :client
+      resources :admin, :client, :contact
     end
 
 
