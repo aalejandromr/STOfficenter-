@@ -1,8 +1,11 @@
 class Users::PasswordsController < Devise::PasswordsController
   # GET /resource/password/new
-  # def new
-  #   super
-  # end
+  def new
+      @dissable_sidenav = true
+      @dissable_topnav = true
+      @dissable_footer = true
+  end
+
 
   # POST /resource/password
   # def create
@@ -15,9 +18,11 @@ class Users::PasswordsController < Devise::PasswordsController
   # end
 
   # PUT /resource/password
-  # def update
-  #   super
-  # end
+  def update
+     @dissable_sidenav = true
+     user = params[:user]
+     
+  end
 
   # protected
 

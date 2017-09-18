@@ -9,9 +9,9 @@ class UserController < ApplicationController
 		
 	end
 
-	def login
-		abort("Message goes here")
-	end
+	
+
+
 
 
 end

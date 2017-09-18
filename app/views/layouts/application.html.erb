@@ -17,12 +17,12 @@
       <div align="center" id="flash" class="alert alert-<%= key %>"><%= value %></div>
   <% end %>
 
-<%= render "partials/sidenav" %>
-<%= render "partials/topnav" %>
+<%= render "partials/sidenav" unless @dissable_sidenav %>
+<%= render "partials/topnav" unless @dissable_topnav %>
 
 <%= yield %>
 
-  <%= render "partials/footer" %>
+  <%= render "partials/footer" unless @dissable_footer%>
   <%= javascript_include_tag 'footermanifest', 'data-turbolinks-track' => true %>
 
 </body>

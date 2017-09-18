@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912032600) do
+ActiveRecord::Schema.define(version: 20170918005124) do
 
   create_table "calles", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 20170912032600) do
     t.string   "telefono",              limit: 255
     t.boolean  "oficina_actual"
     t.integer  "direccion_id",          limit: 4
+    t.boolean  "status"
+    t.string   "sector_economico",      limit: 255
   end
 
   add_index "clients", ["direccion_id"], name: "index_clients_on_direccion_id", using: :btree
@@ -71,6 +73,8 @@ ActiveRecord::Schema.define(version: 20170912032600) do
     t.datetime "updated_at",                  null: false
     t.integer  "position_id",   limit: 4
     t.string   "rec_id",        limit: 255
+    t.string   "dui",           limit: 255
+    t.string   "nit",           limit: 255
   end
 
   add_index "contacts", ["position_id"], name: "fk_rails_fd87a032bf", using: :btree
@@ -128,18 +132,20 @@ ActiveRecord::Schema.define(version: 20170912032600) do
     t.text     "user_name",              limit: 65535
     t.text     "password",               limit: 65535
     t.integer  "rol_id",                 limit: 4
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
-    t.string   "email",                  limit: 255,   default: "", null: false
-    t.string   "encrypted_password",     limit: 255,   default: "", null: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+    t.string   "email",                  limit: 255,   default: "",    null: false
+    t.string   "encrypted_password",     limit: 255,   default: "",    null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,     default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,     default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
+    t.boolean  "RequestResetPassword",                 default: false
+    t.integer  "Supervisor",             limit: 4
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -29,15 +29,19 @@ label.error {
 	margin-left: -230px;
 }
 
-.client-all, .client-all th {
+table, table th {
     text-align: center;
 }
     
-.client-all thead {
+table thead {
     background: #2a3f54;
     color: white;
 }
 
-.client-all tr {
+table tr {
     border-bottom: 1px solid;
+}
+
+.table {
+    margin-top: 13px;
 }

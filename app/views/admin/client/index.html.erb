@@ -43,40 +43,99 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_body">
-          <table class="table client-all">
-            <thead>
-              <tr>
-                <th>Correlativo</th>
-                <th>Nombre</th>
-                <th>Domicilio Fiscal</th>
-                <th>Pagina Web</th>
-                <th>Representante Legal</th>
-                <th>Correo</th>
-                <th>Telefono</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-            <% Client.all.each do |client| %>
-                <tr>
-                <th scope="row"> <%= client.rec_id %> </th>
-                <td><%= client.nombre %></td>
-                <td><%= client.domicilio_fiscal %></td>
-                <td> <a href="<%= client.pagina_web %>"> <%= client.pagina_web %></a></td>
-                <td><%= client.representante_legal %></td>
-                <td><%= client.correo %></td>
-                <td><%= client.telefono %></td>
-                <td> 
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item active">
+              <a class="nav-link" data-toggle="tab" href="#see_all_active" role="tab"> Active(s)</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#see_all_inactive" role="tab">Inactive(s)</a>
+            </li>
+          </ul>
 
-                  <a id="<%= client.rec_id %>" href="#" class="info_action" href=""><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                  <a href="<%= edit_admin_client_path(client.rec_id) %>" class="edit_action"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                  <a href="" class="erase_action"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                </td>
-              </tr>
-              
-            <% end %>
-            </tbody>
-          </table>
+          <!-- Tab panes -->
+          <div class="tab-content">
+              <div class="tab-pane fade in active" id="see_all_active" role="tabpanel">
+                  <table class="table active-all">
+                    <thead>
+                      <tr>
+                        <th>Correlativo</th>
+                        <th>Nombre</th>
+                        <th>Domicilio Fiscal</th>
+                        <th>Pagina Web</th>
+                        <th>Representante Legal</th>
+                        <th>Correo</th>
+                        <th>Telefono</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <% @client_active.each do |client| %>
+                        <tr>
+                          <th scope="row"> <%= client.rec_id %> </th>
+                          <td><%= client.nombre %></td>
+                          <td><%= client.domicilio_fiscal %></td>
+                          <td> <a href="<%= client.pagina_web %>"> <%= client.pagina_web %></a></td>
+                          <td><%= client.representante_legal %></td>
+                          <td><%= client.correo %></td>
+                          <td><%= client.telefono %></td>
+                        <td> 
+
+                          <a id="<%= client.rec_id %>" href="#" class="info_action" href=""><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                          <a href="<%= edit_admin_client_path(client.rec_id) %>" class="edit_action"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                          <a href="#" id="<%= client.rec_id %>" href="" class="inactive_client"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </td>
+                      </tr>
+                      
+                    <% end %>
+                    </tbody>
+                  </table>
+                </div>
+  
+              <div class="tab-pane" id="see_all_inactive" role="tabpanel">
+                <div id="Datos" class="tab-pane fade in">
+                  <table class="table inactive-all">
+                    <thead>
+                      <tr>
+                        <th>Correlativo</th>
+                        <th>Nombre</th>
+                        <th>Domicilio Fiscal</th>
+                        <th>Pagina Web</th>
+                        <th>Representante Legal</th>
+                        <th>Correo</th>
+                        <th>Telefono</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <% @client_inactive.each do |client| %>
+                        <tr>
+                          <th scope="row"> <%= client.rec_id %> </th>
+                          <td><%= client.nombre %></td>
+                          <td><%= client.domicilio_fiscal %></td>
+                          <td> <a href="<%= client.pagina_web %>"> <%= client.pagina_web %></a></td>
+                          <td><%= client.representante_legal %></td>
+                          <td><%= client.correo %></td>
+                          <td><%= client.telefono %></td>
+                        <td> 
+
+                          <a id="<%= client.rec_id %>" href="#" class="info_action" href=""><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                          <a href="<%= edit_admin_client_path(client.rec_id) %>" class="edit_action"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                          <a href="#" id="<%= client.rec_id %>" href="" class="active_client"><i class="fa fa-check-square" aria-hidden="true"></i></a>
+                        </td>
+                      </tr>
+                      
+                    <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+            
+          </div>
+          <div class="x_body">
+          
             
           </div>
         </div>
@@ -84,3 +143,140 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+      $('a.info_action').on('click', function(){
+        var elementId = this.getAttribute('id');
+        $.ajax({
+              type: "GET",
+              //dataType: 'json',
+              url: "/admin/client/" + elementId,
+              success: function (data) {
+              swal({
+              title: '<i>Client - </i> <u> ' + data.rec_id + '</u>',
+              type: 'info',
+              html:
+                'Nombre: ' + data.nombre + "</br>" +
+
+                'Nombre Comercial: ' + data.nombre_comercial + "</br>" +
+
+                'Sector Economico: ' + data.sector_economico + "</br>" +
+      
+                'Domicilio Fiscal: ' + data.domicilio_fiscal + "</br>" +
+                
+                'Pagina Web: ' + data.pagina_web + "</br>" +
+                
+                'Representante Legal: ' + data.representante_legal + "</br>" +
+                
+                'Correo: ' + data.correo + "</br>" +
+                
+                'Telefono: ' + data.telefono + "</br>" +
+                
+                'NIT: ' + data.nit + "</br>" +
+                
+                'Giro Empresa: ' + data.giroEmpresa + "</br>" +
+                
+                'Cantidad de Empleados: ' + data.cantidadEmplados + "</br>" +
+                
+                'Fecha de Constitucion: ' + data.fecha_de_constitucion + "</br>" +
+                
+                'Es Empresa Nacional? ' + data.empresaNacional + "</br>" +
+                
+                'Pais de Origen: ' + data.pais_origen_id + "</br>" +
+
+                'Posee oficina actual? ' + data. oficina_actual + "</br>",
+            })
+            console.log(data);
+              },
+              error: function (error, ajaxContext) {
+                swal(
+              'Fracaso!',
+              'Your file has been deleted.',
+              'error'
+            )
+            }
+        });
+      });
+
+      $('a.inactive_client').on('click', function(){
+        var elementId = this.getAttribute('id');
+        swal({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then(function () {
+            $.ajax({
+                type: "DELETE",
+                //dataType: 'json',
+                url: "/admin/client/inactive_client",
+                data: { id : elementId },    // multiple data sent using ajax
+                success: function (data) {
+                    swal(
+                'Inactived!',
+                'Your client has been inactived.',
+                'success'
+              );
+              console.log(data);
+                },
+                error: function (error, ajaxContext) {
+                  swal(
+                'Fracaso!',
+                'Your file has been deleted.',
+                'error'
+              )
+              }
+             });
+
+      });
+      });
+
+      $('a.active_client').on('click', function(){
+        var elementId = this.getAttribute('id');
+        swal({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then(function () {
+            $.ajax({
+                type: "DELETE",
+                //dataType: 'json',
+                url: "/admin/client/active_client",
+                data: { id : elementId },    // multiple data sent using ajax
+                success: function (data) {
+                    swal(
+                'Actived!',
+                'Your client was successfully active.',
+                'success'
+              );
+              console.log(data);
+                },
+                error: function (error, ajaxContext) {
+                  swal(
+                'Fracaso!',
+                'Your file has been deleted.',
+                'error'
+              )
+              }
+             });
+
+      });
+
+    });
+  });
+
+
+</script>
+
+
+
+
+

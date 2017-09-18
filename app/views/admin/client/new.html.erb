@@ -5,7 +5,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.numeric.extensions.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.date.extensions.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.phone.extensions.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/phone-codes/phone.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/phone-codes/phone-be.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/phone-codes/phone-ru.js"></script>
@@ -59,8 +59,8 @@
           <div class="x_body">
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#datos_empresa" role="tab">Datos Empresa</a>
+            <li class="nav-item active">
+              <a class="nav-link" data-toggle="tab" href="#datos_empresa" role="tab">Datos Empresa</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="tab" href="#datos_contacto" role="tab">Datos Contacto</a>
@@ -69,7 +69,7 @@
 
           <!-- Tab panes -->
           <div class="tab-content">
-              <div class="tab-pane active" id="datos_empresa" role="tabpanel">
+              <div class="tab-pane fade in active" id="datos_empresa" role="tabpanel">
                 <div id="Datos" class="tab-pane fade in">
                <%= form_for Client.new, as: :client, url: "/admin/client", method: :post, html: { class: "new_client", id: "new_client" } do |f| %>
                   <div class="row">
@@ -77,9 +77,11 @@
                       <%= f.label :rec_id,"SERIAL:"%>
                       <%= f.text_field :rec_id,:readonly => true, class: 'form-control', value: "CLNT0000000#{Client.maximum(:id).to_i + 1}"%>
                       <%= f.label :nombre,"Nombre Empresa:"%>
-                      <%= f.text_field :nombre ,  required: true, class: 'form-control', placeholder: 'Nombre Empresa' %>
+                      <%= f.text_field :nombre ,  required: true, class: 'form-control', placeholder: 'Nombre Empresa', "data-inputmask-regex" => "[a-zA-Z ]*"%>
                       <%= f.label :giroEmpresa,"GIRO DE LA EMPRESA:"%>
-                      <%= f.text_field :giroEmpresa, class: 'form-control', placeholder: 'Giro de la Empresa'%>
+                      <%= f.text_field :giroEmpresa, class: 'form-control', placeholder: 'Giro de la Empresa' %>
+                      <%= f.label :sector_economico,"Sector economico:"%>
+                      <%= f.text_field :sector_economico, class: 'form-control', placeholder: 'Sector economico al que pertenece la empresa'%>
                       <%= f.label :nombre_comercial, "Nombre Comercial:"%>
                       <%= f.text_field :nombre_comercial , class: 'form-control', placeholder: 'Nombre Comercial' %>
                       <%= f.label :nit,"No NIT Empresa:"%>
@@ -121,13 +123,17 @@
                       <%= f.label :rec_id,"SERIAL:"%>
                       <%= f.text_field :rec_id,:readonly => true, class: 'form-control', value: "CNT0000000#{Contact.maximum(:id).to_i + 1}"%>
                       <%= f.label :first_name,"Primer Nombre:"%>
-                      <%= f.text_field :first_name ,  required: true, class: 'form-control', placeholder: 'Nombre' %>
+                      <%= f.text_field :first_name ,  required: true, class: 'form-control', placeholder: 'Primer Nombre' %>
                       <%= f.label :middle_name,"Segundo Nombre:"%>
-                      <%= f.text_field :middle_name ,  required: true, class: 'form-control', placeholder: 'Nombre' %>
+                      <%= f.text_field :middle_name ,  required: true, class: 'form-control', placeholder: 'Segundo Nombre' %>
                       <%= f.label :last_name,"Primer Apellido:"%>
-                      <%= f.text_field :last_name ,  required: true, class: 'form-control', placeholder: 'Nombre' %>
+                      <%= f.text_field :last_name ,  required: true, class: 'form-control', placeholder: 'Primer Apellido' %>
                       <%= f.label :sur_name,"Segundo Apellido:"%>
-                      <%= f.text_field :sur_name ,  required: true, class: 'form-control', placeholder: 'Nombre' %>
+                      <%= f.text_field :sur_name ,  required: true, class: 'form-control', placeholder: 'Segundo Apellido' %>
+                      <%= f.label :dui,"DUI:"%>
+                      <%= f.text_field :dui , class: 'form-control', placeholder: 'DUI' %>
+                      <%= f.label :nit,"NIT:"%>
+                      <%= f.text_field :nit , class: 'form-control', placeholder: 'NIT' %>
                       <%= f.label :phone_contact,"Telefono de Contacto:"%>
                       <%= f.text_field :phone_contact, required: true, class: 'form-control', placeholder: 'Telefono de Contacto' %>
                       <label id="client_dui-error" class="error fade in" for="client_nombre" style="display: none;">This field is required.</label>
@@ -157,13 +163,30 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
+    $("#new_client").validate();
+  $("#client_nombre").inputmask('Regex', {
+    casing: "upper"
+  });
     $("#client_dui").inputmask("99999999-9", 
       { 
         "onincomplete":  function(){ 
-          $("#client_dui-error").show();
-          $("#client_dui-error").html("Must be like ########-#");
+
         } 
       });
+    $("#contact_dui").inputmask("99999999-9", 
+      { 
+        "onincomplete":  function(){ 
+          
+        } 
+      });
+
+    $("#contact_nit").inputmask("9999-999999-999-9", { 
+        "onincomplete":  function(){ 
+          $("#client_nit-error").show();
+          $("#client_nit-error").html("Must be like ####-######-###-#");
+        } 
+      });    
+    
     $("#client_registro_fiscal").inputmask("999999-9", 
       { 
         "onincomplete":  function(){ 
@@ -178,8 +201,15 @@
           $("#client_dui-error").html("Must be like ########-#");
         } 
       });
+    
+    $("#contact_mobil_contact").inputmask("9999-9999");
+    $("#contact_phone_contact").inputmask("9999-9999");
+
+    
     Inputmask("url").mask("#client_pagina_web");
     Inputmask("email").mask("#client_correo");
+    Inputmask("email").mask("#contact_email");
+
     
     $("#client_nit").inputmask("9999-999999-999-9", { 
         "onincomplete":  function(){ 

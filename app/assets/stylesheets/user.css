@@ -9,3 +9,33 @@ h2 {
     margin: 10px 0 30px;
     text-align: left;
 }
+
+body {
+	background-color: #f7f7f7 !important;
+	height: 100% !important;
+	display: table;
+	margin-left: auto !important;
+	margin-right: auto !important;
+
+}
+
+html {
+	height: 100% !important;
+}
+
+div.container.body {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#wrapper {
+	margin-top: 0px !important;
+}
+
+.login_content {
+	padding: 0px !important;
+}
+
+#register, #login {
+	position: relative !important; 
+}

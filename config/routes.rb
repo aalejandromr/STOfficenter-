@@ -7,12 +7,19 @@ Rails.application.routes.draw do
 
    Rails.application.routes.draw do
       devise_for :users, controllers: {
-        sessions: 'users/sessions'
+        sessions: 'users/sessions',
+        passwords: 'users/passwords'
       }
     end
 
     namespace :admin do
-      resources :admin, :client, :contact
+      resources :admin, :contact
+      resources :client do
+        collection do
+          delete 'active_client'
+          delete 'inactive_client'
+        end
+      end
     end
 
 
