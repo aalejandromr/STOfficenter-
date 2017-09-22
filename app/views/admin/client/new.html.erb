@@ -1,15 +1,4 @@
-<!-- page content -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.extensions.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.numeric.extensions.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.date.extensions.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.phone.extensions.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/phone-codes/phone.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/phone-codes/phone-be.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/phone-codes/phone-ru.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/css/inputmask.min.css">
+
 
 <div class="right_col" role="main">
   <div class="">
@@ -71,7 +60,7 @@
           <div class="tab-content">
               <div class="tab-pane fade in active" id="datos_empresa" role="tabpanel">
                 <div id="Datos" class="tab-pane fade in">
-               <%= form_for Client.new, as: :client, url: "/admin/client", method: :post, html: { class: "new_client", id: "new_client" } do |f| %>
+               <%= form_for Client.new, as: :client, url: admin_client_index_path, method: :post, html: { class: "new_client", id: "new_client" } do |f| %>
                   <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                       <%= f.label :rec_id,"SERIAL:"%>
@@ -80,6 +69,7 @@
                       <%= f.text_field :nombre ,  required: true, class: 'form-control', placeholder: 'Nombre Empresa', "data-inputmask-regex" => "[a-zA-Z ]*"%>
                       <%= f.label :giroEmpresa,"GIRO DE LA EMPRESA:"%>
                       <%= f.text_field :giroEmpresa, class: 'form-control', placeholder: 'Giro de la Empresa' %>
+                      
                       <%= f.label :sector_economico,"Sector economico:"%>
                       <%= f.text_field :sector_economico, class: 'form-control', placeholder: 'Sector economico al que pertenece la empresa'%>
                       <%= f.label :nombre_comercial, "Nombre Comercial:"%>
@@ -117,7 +107,7 @@
               </div>
               <div class="tab-pane" id="datos_contacto" role="tabpanel">
                 <div id="Datos" class="tab-pane fade in">
-               <%= form_for Contact.new, as: :contact, url: admin_contact_index_path, method: :post, html: { class: "new_client", id: "new_contact_form" } do |f| %>
+               <%= form_for Contact.new, as: :contact, url: admin_client_index_path, method: :post, html: { class: "new_client", id: "new_contact_form" } do |f| %>
                   <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                       <%= f.label :rec_id,"SERIAL:"%>
@@ -144,15 +134,14 @@
                       <%= f.text_field :email, class: 'form-control', placeholder: 'Correo electronico'%>
                       <%= f.label :position_id,"Posicion en la que trabaja:"%>
                       <%= collection_select(:position, :position_id, Position.all, :id, :name_with_initial, {:prompt=>true}, {:class=>'form-control'}) -%>
-
-                      <%= f.submit "Crear", class: 'btn btn-primary submit' %>
+                      <%= f.submit "Create" %>
                     </div>
                   </div>
                 </div>
                 <% end %>
               </div>
             </div>
-            
+            <input type="button" name="commit" value="Crear" class="btn btn-primary submit">
           </div>
         </div>
       </div>
@@ -163,7 +152,28 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
-    $("#new_client").validate();
+    
+    $("input[name=commit]").one('click', function(){
+      var client =  $("#new_client").serializeArray();
+      var contact = $("#new_contact_form").serializeArray();
+      console.log(client);
+      /*$.ajax({
+        type: "POST",
+        url: "/admin/client",
+        data: {
+          client: client, 
+          contact: contact
+        },
+        success: function(data){
+          console.log(data);
+        },
+        error: function(error){
+          console.log(error);
+        }
+      });*/
+    });
+
+  $("#new_client").validate();
   $("#client_nombre").inputmask('Regex', {
     casing: "upper"
   });
@@ -225,7 +235,15 @@
 
 
 
+<style type="text/css">
+  
+  .btn.btn-primary.submit {
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
+</style>
 
 
 

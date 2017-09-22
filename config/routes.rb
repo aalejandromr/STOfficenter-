@@ -20,6 +20,12 @@ Rails.application.routes.draw do
           delete 'inactive_client'
         end
       end
+      resources :users do
+        collection do
+          get 'reset_user_password'
+          patch 'reset_user_password_action'
+        end
+      end
     end
 
 

@@ -66,7 +66,74 @@ class Admin::ClientController < ApplicationController
 	end
 
 	def create
-		cliente = params[:client]   
+		abort(params[:client[2]].to_s)
+		Request parameters
+		{"client"=>
+			{"0"=>{"name"=>"utf8",
+		 "value"=>"✓"},
+		 "1"=>{"name"=>"authenticity_token",
+		 "value"=>"FGqylmzRwbU6aJbD2hI7z5fU9AqQbTexA/cUVRDZkpKB+nsE02Voc/ieV2DaAY8OGAFKQInkR75kX3w4PWp70g=="},
+		 "2"=>{"name"=>"client[rec_id]",
+		 "value"=>"CLNT000000011"},
+		 "3"=>{"name"=>"client[nombre]",
+		 "value"=>""},
+		 "4"=>{"name"=>"client[giroEmpresa]",
+		 "value"=>""},
+		 "5"=>{"name"=>"client[sector_economico]",
+		 "value"=>""},
+		 "6"=>{"name"=>"client[nombre_comercial]",
+		 "value"=>""},
+		 "7"=>{"name"=>"client[nit]",
+		 "value"=>""},
+		 "8"=>{"name"=>"client[cantidadEmpleados]",
+		 "value"=>""},
+		 "9"=>{"name"=>"client[fecha_de_constitucion]",
+		 "value"=>""},
+		 "10"=>{"name"=>"empresaNacional",
+		 "value"=>"3"},
+		 "11"=>{"name"=>"paisorigen[pais_origen_id]",
+		 "value"=>""},
+		 "12"=>{"name"=>"client[representante_legal]",
+		 "value"=>""},
+		 "13"=>{"name"=>"oficina_actual",
+		 "value"=>"3"},
+		 "14"=>{"name"=>"client[correo]",
+		 "value"=>""},
+		 "15"=>{"name"=>"client[telefono]",
+		 "value"=>""},
+		 "16"=>{"name"=>"client[pagina_web]",
+		 "value"=>""},
+		 "17"=>{"name"=>"client[domicilio_fiscal]",
+		 "value"=>""},
+		 "18"=>{"name"=>"client[registro_fiscal]",
+		 "value"=>""}},
+		 "contact"=>{"0"=>{"name"=>"utf8",
+		 "value"=>"✓"},
+		 "1"=>{"name"=>"authenticity_token",
+		 "value"=>"FGqylmzRwbU6aJbD2hI7z5fU9AqQbTexA/cUVRDZkpKB+nsE02Voc/ieV2DaAY8OGAFKQInkR75kX3w4PWp70g=="},
+		 "2"=>{"name"=>"contact[rec_id]",
+		 "value"=>"CNT00000004"},
+		 "3"=>{"name"=>"contact[first_name]",
+		 "value"=>""},
+		 "4"=>{"name"=>"contact[middle_name]",
+		 "value"=>""},
+		 "5"=>{"name"=>"contact[last_name]",
+		 "value"=>""},
+		 "6"=>{"name"=>"contact[sur_name]",
+		 "value"=>""},
+		 "7"=>{"name"=>"contact[dui]",
+		 "value"=>""},
+		 "8"=>{"name"=>"contact[nit]",
+		 "value"=>""},
+		 "9"=>{"name"=>"contact[phone_contact]",
+		 "value"=>""},
+		 "10"=>{"name"=>"contact[mobil_contact]",
+		 "value"=>""},
+		 "11"=>{"name"=>"contact[email]",
+		 "value"=>""},
+		 "12"=>{"name"=>"position[position_id]",
+		 "value"=>""}}}
+		cliente = params[:client]
 		result = Client.create(
 			nombre: cliente[:nombre],  
 			nit: cliente[:nit],
@@ -87,10 +154,10 @@ class Admin::ClientController < ApplicationController
 			status: true)
 		if result
 			flash[:success ] = "Your client was successfully created."
-			redirect_to admin_client_path
+			redirect_to admin_client_index_path
 		else
 			flash[:error] = "Something went wrong, please make sure to fullfil the form correctly."
-			redirect_to admin_client_path
+			redirect_to admin_client_index_path
 		end
 	end
 

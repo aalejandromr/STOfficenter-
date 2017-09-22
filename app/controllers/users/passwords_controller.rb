@@ -21,7 +21,9 @@ class Users::PasswordsController < Devise::PasswordsController
   def update
      @dissable_sidenav = true
      user = params[:user]
-     
+     userToFound = User.where(email: user["email"]).take
+     User.update(userToFound.id, :RequestResetPassword => true)
+     redirect_to root_path
   end
 
   # protected

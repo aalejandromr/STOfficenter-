@@ -34,65 +34,23 @@
         <li role="presentation" class="dropdown">
           <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-envelope-o"></i>
-            <span class="badge bg-green">6</span>
+            <span class="badge bg-green">1</span>
           </a>
           <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+            <% @user = User.where(RequestResetPassword: true, Supervisor: current_user.id).count %>
+            <% if @user %>
             <li>
               <a>
-                      <span class="image">
-                                        <%= image_tag "img.jpg" %>
-                                    </span>
                       <span>
                                         <span>John Smith</span>
                       <span class="time">3 mins ago</span>
                       </span>
                       <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                                        <a href="<%=reset_user_password_admin_users_path%>"> <span> Tienes <%= @user %> usuario(s) que necesitan reset de contraseña. </span> </a>
                                     </span>
               </a>
             </li>
-            <li>
-              <a>
-                      <span class="image">
-                                       <%= image_tag "img.jpg" %>
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-              </a>
-            </li>
-            <li>
-              <a>
-                      <span class="image">
-                                       <%= image_tag "img.jpg" %>
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-              </a>
-            </li>
-            <li>
-              <a>
-                      <span class="image">
-                                        <%= image_tag "img.jpg" %>
-                                    </span>
-                      <span>
-                                        <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                    </span>
-              </a>
-            </li>
+            <% end %>
             <li>
               <div class="text-center">
                 <a>
