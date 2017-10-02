@@ -50,6 +50,9 @@
             <li class="nav-item active">
               <a class="nav-link" data-toggle="tab" href="#datos_empresa" role="tab">Datos Empresa</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#contacts_all" role="tab">Datos Contactos</a>
+            </li>
           </ul>
 
           <!-- Tab panes -->
@@ -98,6 +101,45 @@
                     <% end %>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div class="tab-pane active" id="contacts_all" role="tabpanel">
+                <div id="ContactAll" class="tab-pane fade in">
+                  <table class="table active-all">
+                    <thead>
+                      <tr>
+                        <th>REC ID</th>
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                        <th>Surname</th>
+                        <th>Last Name</th> 
+                        <th>Phone Contact</th>
+                        <th>Mobil Contact</th>
+                        <th>Email</th>
+                        <th>Dui</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <% @AllClientContact.each do |contact| %>
+                        <tr>
+                          <th scope="row"> <%= contact.rec_id %> </th>
+                          <td><%= contact.first_name %></td>
+                          <td><%= contact.middle_name %></td>
+                          <td> <%= contact.last_name %> </td>
+                          <td><%= contact.sur_name %></td>
+                          <td><%= contact.phone_contact %></td>
+                          <td><%= contact.mobil_contact %></td>
+                          <td><%= contact.email %></td>
+                          <td><%= contact.dui %></td>
+                        <td> 
+                          <a href="<%= edit_admin_contact_path(contact.rec_id) %>" class="edit_action"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        </td>
+                      </tr>
+                      
+                    <% end %>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>

@@ -16,6 +16,7 @@ class Admin::ClientController < ApplicationController
 
 	def edit
 		@ClientFound = Client.find_by(rec_id: params[:id])
+		@AllClientContact = Contact.where(client_id: @ClientFound.id)
 	end
 
 	def destroy
@@ -66,73 +67,6 @@ class Admin::ClientController < ApplicationController
 	end
 
 	def create
-		abort(params[:client[2]].to_s)
-		Request parameters
-		{"client"=>
-			{"0"=>{"name"=>"utf8",
-		 "value"=>"✓"},
-		 "1"=>{"name"=>"authenticity_token",
-		 "value"=>"FGqylmzRwbU6aJbD2hI7z5fU9AqQbTexA/cUVRDZkpKB+nsE02Voc/ieV2DaAY8OGAFKQInkR75kX3w4PWp70g=="},
-		 "2"=>{"name"=>"client[rec_id]",
-		 "value"=>"CLNT000000011"},
-		 "3"=>{"name"=>"client[nombre]",
-		 "value"=>""},
-		 "4"=>{"name"=>"client[giroEmpresa]",
-		 "value"=>""},
-		 "5"=>{"name"=>"client[sector_economico]",
-		 "value"=>""},
-		 "6"=>{"name"=>"client[nombre_comercial]",
-		 "value"=>""},
-		 "7"=>{"name"=>"client[nit]",
-		 "value"=>""},
-		 "8"=>{"name"=>"client[cantidadEmpleados]",
-		 "value"=>""},
-		 "9"=>{"name"=>"client[fecha_de_constitucion]",
-		 "value"=>""},
-		 "10"=>{"name"=>"empresaNacional",
-		 "value"=>"3"},
-		 "11"=>{"name"=>"paisorigen[pais_origen_id]",
-		 "value"=>""},
-		 "12"=>{"name"=>"client[representante_legal]",
-		 "value"=>""},
-		 "13"=>{"name"=>"oficina_actual",
-		 "value"=>"3"},
-		 "14"=>{"name"=>"client[correo]",
-		 "value"=>""},
-		 "15"=>{"name"=>"client[telefono]",
-		 "value"=>""},
-		 "16"=>{"name"=>"client[pagina_web]",
-		 "value"=>""},
-		 "17"=>{"name"=>"client[domicilio_fiscal]",
-		 "value"=>""},
-		 "18"=>{"name"=>"client[registro_fiscal]",
-		 "value"=>""}},
-		 "contact"=>{"0"=>{"name"=>"utf8",
-		 "value"=>"✓"},
-		 "1"=>{"name"=>"authenticity_token",
-		 "value"=>"FGqylmzRwbU6aJbD2hI7z5fU9AqQbTexA/cUVRDZkpKB+nsE02Voc/ieV2DaAY8OGAFKQInkR75kX3w4PWp70g=="},
-		 "2"=>{"name"=>"contact[rec_id]",
-		 "value"=>"CNT00000004"},
-		 "3"=>{"name"=>"contact[first_name]",
-		 "value"=>""},
-		 "4"=>{"name"=>"contact[middle_name]",
-		 "value"=>""},
-		 "5"=>{"name"=>"contact[last_name]",
-		 "value"=>""},
-		 "6"=>{"name"=>"contact[sur_name]",
-		 "value"=>""},
-		 "7"=>{"name"=>"contact[dui]",
-		 "value"=>""},
-		 "8"=>{"name"=>"contact[nit]",
-		 "value"=>""},
-		 "9"=>{"name"=>"contact[phone_contact]",
-		 "value"=>""},
-		 "10"=>{"name"=>"contact[mobil_contact]",
-		 "value"=>""},
-		 "11"=>{"name"=>"contact[email]",
-		 "value"=>""},
-		 "12"=>{"name"=>"position[position_id]",
-		 "value"=>""}}}
 		cliente = params[:client]
 		result = Client.create(
 			nombre: cliente[:nombre],  
@@ -152,11 +86,26 @@ class Admin::ClientController < ApplicationController
 			registro_fiscal: cliente[:registro_fiscal],
 			rec_id: cliente[:rec_id],
 			status: true)
+
+		contact = params[:contact]   
+		result = Contact.create(
+			first_name: contact[:first_name],  
+			middle_name: contact[:middle_name],
+			last_name: contact[:last_name], 
+			sur_name: contact[:sur_name],  
+			phone_contact: contact[:phone_contact], 
+			mobil_contact: contact[:mobil_contact], 
+			email: contact[:email],
+			position_id: params[:position][:position_id],
+			rec_id: contact[:rec_id],
+			dui: contact[:dui],
+			rec_id: contact[:rec_id],
+			client_id: result.id)
 		if result
-			flash[:success ] = "Your client was successfully created."
+			flash[:success ] = "Tu cliente y su contacto fueron guardados correctamente."
 			redirect_to admin_client_index_path
 		else
-			flash[:error] = "Something went wrong, please make sure to fullfil the form correctly."
+			flash[:error] = "Algo salio mal, intentalo de nuevo."
 			redirect_to admin_client_index_path
 		end
 	end

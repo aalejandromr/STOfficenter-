@@ -1,0 +1,149 @@
+
+
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Update Contract - <%=@Contract.rec_id%> </h3>
+      </div>
+
+      <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">Go!</button>
+                          </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel" style="min-height: 600px;">
+          <div class="x_title">
+            <h2>Update Contract</h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Settings 1</a>
+                  </li>
+                  <li><a href="#">Settings 2</a>
+                  </li>
+                </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix">
+              
+            </div>
+          </div>
+          <div class="x_body">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item active">
+              <a class="nav-link" data-toggle="tab" href="#datos_contrato" role="tab">Datos Contrato</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#datos_empresa" role="tab">Datos Empresa</a>
+            </li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            
+              <div class="tab-pane fade in active" id="datos_contrato" role="tabpanel">
+                <div id="Datos" class="tab-pane fade in">
+                  <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                      <%= form_for @ClientFound, as: :client, url: admin_client_path, method: :patch, html: { class: "new_client", id: "new_client" } do |f| %>
+                        <%= f.label :rec_id, "SERIAL:"%>
+                        <%= f.text_field :rec_id,:readonly => true, class: 'form-control', value: @ClientFound.rec_id%>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="tab-pane fade in" id="datos_empresa" role="tabpanel">
+                  <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                       <%= form_for @ClientFound, as: :client, url: admin_client_path, method: :patch, html: { class: "new_client", id: "new_client" } do |f| %>
+                            <%= f.label :rec_id,"SERIAL:"%>
+                            <%= f.text_field :rec_id,:readonly => true, class: 'form-control', value: @ClientFound.rec_id%>
+                            <%= f.label :nombre,"Nombre Empresa:"%>
+                            <%= f.text_field :nombre ,  required: true, class: 'form-control', placeholder: 'Nombre Empresa' %>
+                            <%= f.label :giroEmpresa,"GIRO DE LA EMPRESA:"%>
+                            <%= f.text_field :giroEmpresa, class: 'form-control', placeholder: 'Giro de la Empresa'%>
+                            <%= f.label :nombre_comercial, "Nombre Comercial:"%>
+                            <%= f.text_field :nombre_comercial , class: 'form-control', placeholder: 'Nombre Comercial' %>
+                            <%= f.label :sector_economico,"Sector economico:"%>
+                            <%= f.text_field :sector_economico, class: 'form-control', placeholder: 'Sector economico al que pertenece la empresa'%>
+                            <%= f.label :nit,"No NIT Empresa:"%>
+                            <%= f.text_field :nit, class: 'form-control', placeholder: 'NIT', required: true%>
+                            
+                            <%= f.label :cantidadEmpleados,"CANTIDAD DE EMPLEADOS:"%>
+                            <%= f.number_field :cantidadEmpleados, class: 'form-control', placeholder: 'Cantidad de Empleados'%>
+                            <%= f.label :fecha_de_constitucion,"FECHA DE CONSTITUCION DE LA EMPRESA:"%>
+                            <%= f.date_field :fecha_de_constitucion, class: 'form-control'%>
+                            <%= f.label :empresaNacional,"Es empresa Nacional? "%>
+                            <%= select_tag(:empresaNacional, options_for_select([['True', 1], ['False', 2], ['Select one please', 3]], @ClientFound.empresaNacional), {:class => 'form-control'})  %>
+                            <%= f.label :pais_origen_id,"PAIS DE ORIGEN:"%>
+                            <%= f.collection_select(:pais_origen_id, PaisOrigen.all, :id, :name_with_initial, {prompt: "Seleccione un Pais"}, {:required => true, :class=>'form-control'}) %>
+                            <%= f.label :representante_legal,"Representante Legal:"%>
+                            <%= f.text_field :representante_legal, class: 'form-control', placeholder: 'Representante Legal' %>      
+                            <%= f.label :oficina_actual,"Posee Oficina?"%>
+                            <%= select_tag(:oficina_actual, options_for_select([['True', 1], ['False', 2], ['Select one please', 3]], @ClientFound.oficina_actual), {:class => 'form-control'})  %>
+                            <%= f.label :correo,"Correo Empresarial:"%>
+                            <%= f.text_field :correo, class: 'form-control', placeholder: 'Correo Empresarial' %>
+                            <%= f.label :telefono,"Telefono:"%>
+                            <%= f.text_field :telefono, class: 'form-control', placeholder: 'Telefono' %>
+                            <%= f.label :pagina_web,"Pagina Web Empresarial:"%>
+                            <%= f.text_field :pagina_web , class: 'form-control', placeholder: 'Pagina Web Empresarial' %>
+                            <%= f.label :domicilio_fiscal,"Domicilio Fiscal:"%>
+                            <%= f.text_field :domicilio_fiscal , required: true, class: 'form-control', placeholder: 'Domicilio Fiscal' %>
+                            <%= f.label :registro_fiscal,"No NRF:"%>
+                            <%= f.text_field :registro_fiscal, class: 'form-control', placeholder: 'NRF', required: true%>
+                            <%= f.submit "Modificar", class: 'btn btn-primary submit' %>
+                          <% end %>
+              </div>
+          </div>
+              
+            </div>
+           <!-- <input type="button" name="commit" value="Crear" class="btn btn-primary submit">-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<style type="text/css">
+  
+  .btn.btn-primary.submit {
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+</style>
+
+
+
+
+
+
+
+
+
+
+

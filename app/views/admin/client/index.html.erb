@@ -83,7 +83,8 @@
 
                           <a id="<%= client.rec_id %>" href="#" class="info_action" href=""><i class="fa fa-info-circle" aria-hidden="true"></i></a>
                           <a href="<%= edit_admin_client_path(client.rec_id) %>" class="edit_action"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                          <a href="#" id="<%= client.rec_id %>" href="" class="inactive_client"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                          <a href="#" id="<%= client.rec_id %>" class="inactive_client"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                          <a href="<%=new_admin_contract_path(id: client.id )%>" id="<%= client.rec_id %>" class="generate_contract"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                         </td>
                       </tr>
                       
@@ -117,12 +118,6 @@
                           <td><%= client.representante_legal %></td>
                           <td><%= client.correo %></td>
                           <td><%= client.telefono %></td>
-                        <td> 
-
-                          <a id="<%= client.rec_id %>" href="#" class="info_action" href=""><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                          <a href="<%= edit_admin_client_path(client.rec_id) %>" class="edit_action"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                          <a href="#" id="<%= client.rec_id %>" href="" class="active_client"><i class="fa fa-check-square" aria-hidden="true"></i></a>
-                        </td>
                       </tr>
                       
                     <% end %>

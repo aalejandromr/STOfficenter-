@@ -58,88 +58,503 @@
 
           <!-- Tab panes -->
           <div class="tab-content">
+            <form class="new_client" id="new_client" action="/admin/client" accept-charset="UTF-8" method="post" novalidate="novalidate">
+                <input name="utf8" type="hidden" value="✓">
+                <input type="hidden" name="authenticity_token" value="H7lWsdMvpjoPtxr9FoFPd2JYms8p9h4iqLQyv0RROwTM85yO+98fMxueTRqA9ZMr14GCHu+oaGdYqn39iz1EvQ==">
               <div class="tab-pane fade in active" id="datos_empresa" role="tabpanel">
                 <div id="Datos" class="tab-pane fade in">
-               <%= form_for Client.new, as: :client, url: admin_client_index_path, method: :post, html: { class: "new_client", id: "new_client" } do |f| %>
+               
                   <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-                      <%= f.label :rec_id,"SERIAL:"%>
-                      <%= f.text_field :rec_id,:readonly => true, class: 'form-control', value: "CLNT0000000#{Client.maximum(:id).to_i + 1}"%>
-                      <%= f.label :nombre,"Nombre Empresa:"%>
-                      <%= f.text_field :nombre ,  required: true, class: 'form-control', placeholder: 'Nombre Empresa', "data-inputmask-regex" => "[a-zA-Z ]*"%>
-                      <%= f.label :giroEmpresa,"GIRO DE LA EMPRESA:"%>
-                      <%= f.text_field :giroEmpresa, class: 'form-control', placeholder: 'Giro de la Empresa' %>
+                      <label for="client_rec_id">SERIAL:</label>
+                      <input readonly="readonly" class="form-control" value="CLNT000000011" type="text" name="client[rec_id]" id="client_rec_id">
+                      <label for="client_nombre">Nombre Empresa:</label>
+                      <input required="required" class="form-control" placeholder="Nombre Empresa" data-inputmask-regex="[a-zA-Z ]*" type="text" name="client[nombre]" id="client_nombre">
+                      <label id="client_nombre-error" class="error" style="display: none;" for="client_nombre">This field is required.</label>
+                      <label for="client_giroEmpresa">GIRO DE LA EMPRESA:</label>
+                      <input class="form-control" placeholder="Giro de la Empresa" type="text" name="client[giroEmpresa]" id="client_giroEmpresa">
                       
-                      <%= f.label :sector_economico,"Sector economico:"%>
-                      <%= f.text_field :sector_economico, class: 'form-control', placeholder: 'Sector economico al que pertenece la empresa'%>
-                      <%= f.label :nombre_comercial, "Nombre Comercial:"%>
-                      <%= f.text_field :nombre_comercial , class: 'form-control', placeholder: 'Nombre Comercial' %>
-                      <%= f.label :nit,"No NIT Empresa:"%>
-                      <%= f.text_field :nit, class: 'form-control', placeholder: 'NIT', required: true%>
-                      
-                      <%= f.label :cantidadEmpleados,"CANTIDAD DE EMPLEADOS:"%>
-                      <%= f.number_field :cantidadEmpleados, class: 'form-control', placeholder: 'Cantidad de Empleados'%>
-                      <%= f.label :fecha_de_constitucion,"FECHA DE CONSTITUCION DE LA EMPRESA:"%>
-                      <%= f.date_field :fecha_de_constitucion, class: 'form-control'%>
-                      <%= f.label :empresaNacional,"Es empresa Nacional? "%>
-                      <%= select_tag(:empresaNacional, options_for_select([['True', 1], ['False', 2], ['Select one please', 3]], 3), {:class => 'form-control'})  %>
-                      <%= f.label :pais_origen_id,"PAIS DE ORIGEN:"%>
-                      <%= collection_select(:paisorigen, :pais_origen_id, PaisOrigen.all, :id, :name_with_initial, {:prompt=>true}, {:class=>'form-control'}) -%>
-                      <%= f.label :representante_legal,"Representante Legal:"%>
-                      <%= f.text_field :representante_legal, class: 'form-control', placeholder: 'Representante Legal' %>      
-                      <%= f.label :oficina_actual,"Posee Oficina?"%>
-                      <%= select_tag(:oficina_actual, options_for_select([['True', 1], ['False', 2], ['Select one please', 3]], 3), {:class => 'form-control'})  %>
-                      <%= f.label :correo,"Correo Empresarial:"%>
-                      <%= f.text_field :correo, class: 'form-control', placeholder: 'Correo Empresarial' %>
-                      <%= f.label :telefono,"Telefono:"%>
-                      <%= f.text_field :telefono, class: 'form-control', placeholder: 'Telefono' %>
-                      <%= f.label :pagina_web,"Pagina Web Empresarial:"%>
-                      <%= f.text_field :pagina_web , class: 'form-control', placeholder: 'Pagina Web Empresarial' %>
-                      <%= f.label :domicilio_fiscal,"Domicilio Fiscal:"%>
-                      <%= f.text_field :domicilio_fiscal , required: true, class: 'form-control', placeholder: 'Domicilio Fiscal' %>
-                      <%= f.label :registro_fiscal,"No NRF:"%>
-                      <%= f.text_field :registro_fiscal, class: 'form-control', placeholder: 'NRF', required: true%>
-                      <%= f.submit "Crear", class: 'btn btn-primary submit' %>
-                    <% end %>
-                    </div>
-                  </div>
-                </div>
+                      <label for="client_sector_economico">Sector economico:</label>
+                      <input class="form-control" placeholder="Sector economico al que pertenece la empresa" type="text" name="client[sector_economico]" id="client_sector_economico">
+                      <label for="client_nombre_comercial">Nombre Comercial:</label>
+                      <input class="form-control" placeholder="Nombre Comercial" type="text" name="client[nombre_comercial]" id="client_nombre_comercial">
+                      <label for="client_nit">No NIT Empresa:</label>
+                      <input class="form-control" placeholder="NIT" required="required" type="text" value="" name="client[nit]" id="client_nit">
+                      <label id="client_nit-error" class="error" style="display: none;" for="client_nit">This field is required.</label>
+                      <label for="client_cantidadEmpleados">CANTIDAD DE EMPLEADOS:</label>
+                      <input class="form-control" placeholder="Cantidad de Empleados" type="number" name="client[cantidadEmpleados]" id="client_cantidadEmpleados">
+                      <label for="client_fecha_de_constitucion">FECHA DE CONSTITUCION DE LA EMPRESA:</label>
+                      <input class="form-control" type="date" name="client[fecha_de_constitucion]" id="client_fecha_de_constitucion">
+                      <label for="client_empresaNacional">Es empresa Nacional? </label>
+                      <select name="empresaNacional" id="empresaNacional" class="form-control"><option value="1">True</option>
+                      <option value="2">False</option>
+                      <option selected="selected" value="3">Select one please</option></select>
+                                            <label for="client_pais_origen_id">PAIS DE ORIGEN:</label>
+                                            <select class="form-control" name="paisorigen[pais_origen_id]" id="paisorigen_pais_origen_id"><option value="">Please select</option>
+                      <option value="1">Afghanistan</option>
+                      <option value="2">Albania</option>
+                      <option value="3">Algeria</option>
+                      <option value="4">Andorra</option>
+                      <option value="5">Angola</option>
+                      <option value="6">Antigua and Barbuda</option>
+                      <option value="7">Argentina</option>
+                      <option value="8">Armenia</option>
+                      <option value="9">Australia</option>
+                      <option value="10">Austria</option>
+                      <option value="11">Azerbaijan</option>
+                      <option value="12">Bahamas, The</option>
+                      <option value="13">Bahrain</option>
+                      <option value="14">Bangladesh</option>
+                      <option value="15">Barbados</option>
+                      <option value="16">Belarus</option>
+                      <option value="17">Belgium</option>
+                      <option value="18">Belize</option>
+                      <option value="19">Benin</option>
+                      <option value="20">Bhutan</option>
+                      <option value="21">Bolivia</option>
+                      <option value="22">Bosnia and Herzegovina</option>
+                      <option value="23">Botswana</option>
+                      <option value="24">Brazil</option>
+                      <option value="25">Brunei</option>
+                      <option value="26">Bulgaria</option>
+                      <option value="27">Burkina Faso</option>
+                      <option value="28">Burma</option>
+                      <option value="29">Burundi</option>
+                      <option value="30">Cambodia</option>
+                      <option value="31">Cameroon</option>
+                      <option value="32">Canada</option>
+                      <option value="33">Cape Verde</option>
+                      <option value="34">Central Africa</option>
+                      <option value="35">Chad</option>
+                      <option value="36">Chile</option>
+                      <option value="37">China</option>
+                      <option value="38">Colombia</option>
+                      <option value="39">Comoros</option>
+                      <option value="40">Congo, Democratic Republic of the</option>
+                      <option value="41">Costa Rica</option>
+                      <option value="42">Cote dIvoire</option>
+                      <option value="43">Crete</option>
+                      <option value="44">Croatia</option>
+                      <option value="45">Cuba</option>
+                      <option value="46">Cyprus</option>
+                      <option value="47">Czech Republic</option>
+                      <option value="48">Denmark</option>
+                      <option value="49">Djibouti</option>
+                      <option value="50">Dominican Republic</option>
+                      <option value="51">East Timor</option>
+                      <option value="52">Ecuador</option>
+                      <option value="53">Egypt</option>
+                      <option value="54">El Salvador</option>
+                      <option value="55">Equatorial Guinea</option>
+                      <option value="56">Eritrea</option>
+                      <option value="57">Estonia</option>
+                      <option value="58">Ethiopia</option>
+                      <option value="59">Fiji</option>
+                      <option value="60">Finland</option>
+                      <option value="61">France</option>
+                      <option value="62">Gabon</option>
+                      <option value="63">Gambia, The</option>
+                      <option value="64">Georgia</option>
+                      <option value="65">Germany</option>
+                      <option value="66">Ghana</option>
+                      <option value="67">Greece</option>
+                      <option value="68">Grenada</option>
+                      <option value="69">Guadeloupe</option>
+                      <option value="70">Guatemala</option>
+                      <option value="71">Guinea</option>
+                      <option value="72">Guinea-Bissau</option>
+                      <option value="73">Guyana</option>
+                      <option value="74">Haiti</option>
+                      <option value="75">Holy See</option>
+                      <option value="76">Honduras</option>
+                      <option value="77">Hong Kong</option>
+                      <option value="78">Hungary</option>
+                      <option value="79">Iceland</option>
+                      <option value="80">India</option>
+                      <option value="81">Indonesia</option>
+                      <option value="82">Iran</option>
+                      <option value="83">Iraq</option>
+                      <option value="84">Ireland</option>
+                      <option value="85">Israel</option>
+                      <option value="86">Italy</option>
+                      <option value="87">Ivory Coast</option>
+                      <option value="88">Jamaica</option>
+                      <option value="89">Japan</option>
+                      <option value="90">Jordan</option>
+                      <option value="91">Kazakhstan</option>
+                      <option value="92">Kenya</option>
+                      <option value="93">Kiribati</option>
+                      <option value="94">Korea, North</option>
+                      <option value="95">Korea, South</option>
+                      <option value="96">Kosovo</option>
+                      <option value="97">Kuwait</option>
+                      <option value="98">Kyrgyzstan</option>
+                      <option value="99">Laos</option>
+                      <option value="100">Latvia</option>
+                      <option value="101">Lebanon</option>
+                      <option value="102">Lesotho</option>
+                      <option value="103">Liberia</option>
+                      <option value="104">Libya</option>
+                      <option value="105">Liechtenstein</option>
+                      <option value="106">Lithuania</option>
+                      <option value="107">Macau</option>
+                      <option value="108">Macedonia</option>
+                      <option value="109">Madagascar</option>
+                      <option value="110">Malawi</option>
+                      <option value="111">Malaysia</option>
+                      <option value="112">Maldives</option>
+                      <option value="113">Mali</option>
+                      <option value="114">Malta</option>
+                      <option value="115">Marshall Islands</option>
+                      <option value="116">Mauritania</option>
+                      <option value="117">Mauritius</option>
+                      <option value="118">Mexico</option>
+                      <option value="119">Micronesia</option>
+                      <option value="120">Moldova</option>
+                      <option value="121">Monaco</option>
+                      <option value="122">Mongolia</option>
+                      <option value="123">Montenegro</option>
+                      <option value="124">Morocco</option>
+                      <option value="125">Mozambique</option>
+                      <option value="126">Namibia</option>
+                      <option value="127">Nauru</option>
+                      <option value="128">Nepal</option>
+                      <option value="129">Netherlands</option>
+                      <option value="130">New Zealand</option>
+                      <option value="131">Nicaragua</option>
+                      <option value="132">Niger</option>
+                      <option value="133">Nigeria</option>
+                      <option value="134">North Korea</option>
+                      <option value="135">Norway</option>
+                      <option value="136">Oman</option>
+                      <option value="137">Pakistan</option>
+                      <option value="138">Palau</option>
+                      <option value="139">Panama</option>
+                      <option value="140">Papua New Guinea</option>
+                      <option value="141">Paraguay</option>
+                      <option value="142">Peru</option>
+                      <option value="143">Philippines</option>
+                      <option value="144">Poland</option>
+                      <option value="145">Portugal</option>
+                      <option value="146">Qatar</option>
+                      <option value="147">Romania</option>
+                      <option value="148">Russia</option>
+                      <option value="149">Rwanda</option>
+                      <option value="150">Saint Lucia</option>
+                      <option value="151">Saint Vincent and the Grenadines</option>
+                      <option value="152">Samoa</option>
+                      <option value="153">San Marino</option>
+                      <option value="154">Sao Tome and Principe</option>
+                      <option value="155">Saudi Arabia</option>
+                      <option value="156">Scotland</option>
+                      <option value="157">Senegal</option>
+                      <option value="158">Serbia</option>
+                      <option value="159">Seychelles</option>
+                      <option value="160">Sierra Leone</option>
+                      <option value="161">Singapore</option>
+                      <option value="162">Slovakia</option>
+                      <option value="163">Slovenia</option>
+                      <option value="164">Solomon Islands</option>
+                      <option value="165">Somalia</option>
+                      <option value="166">South Africa</option>
+                      <option value="167">South Korea</option>
+                      <option value="168">Spain</option>
+                      <option value="169">Sri Lanka</option>
+                      <option value="170">Sudan</option>
+                      <option value="171">Suriname</option>
+                      <option value="172">Swaziland</option>
+                      <option value="173">Sweden</option>
+                      <option value="174">Switzerland</option>
+                      <option value="175">Syria</option>
+                      <option value="176">Taiwan</option>
+                      <option value="177">Tajikistan</option>
+                      <option value="178">Tanzania</option>
+                      <option value="179">Thailand</option>
+                      <option value="180">Tibet</option>
+                      <option value="181">Timor-Leste</option>
+                      <option value="182">Togo</option>
+                      <option value="183">Tonga</option>
+                      <option value="184">Trinidad and Tobago</option>
+                      <option value="185">Tunisia</option>
+                      <option value="186">Turkey</option>
+                      <option value="187">Turkmenistan</option>
+                      <option value="188">Tuvalu</option>
+                      <option value="189">Uganda</option>
+                      <option value="190">Ukraine</option>
+                      <option value="191">United Arab Emirates</option>
+                      <option value="192">United Kingdom</option>
+                      <option value="193">United States</option>
+                      <option value="194">Uruguay</option>
+                      <option value="195">Uzbekistan</option>
+                      <option value="196">Vanuatu</option>
+                      <option value="197">Venezuela</option>
+                      <option value="198">Vietnam</option>
+                      <option value="199">Yemen</option>
+                      <option value="200">Zambia</option>
+                      <option value="201">Zimbabwe</option>
+                      <option value="202">Afghanistan</option>
+                      <option value="203">Albania</option>
+                      <option value="204">Algeria</option>
+                      <option value="205">Andorra</option>
+                      <option value="206">Angola</option>
+                      <option value="207">Antigua and Barbuda</option>
+                      <option value="208">Argentina</option>
+                      <option value="209">Armenia</option>
+                      <option value="210">Australia</option>
+                      <option value="211">Austria</option>
+                      <option value="212">Azerbaijan</option>
+                      <option value="213">Bahamas, The</option>
+                      <option value="214">Bahrain</option>
+                      <option value="215">Bangladesh</option>
+                      <option value="216">Barbados</option>
+                      <option value="217">Belarus</option>
+                      <option value="218">Belgium</option>
+                      <option value="219">Belize</option>
+                      <option value="220">Benin</option>
+                      <option value="221">Bhutan</option>
+                      <option value="222">Bolivia</option>
+                      <option value="223">Bosnia and Herzegovina</option>
+                      <option value="224">Botswana</option>
+                      <option value="225">Brazil</option>
+                      <option value="226">Brunei</option>
+                      <option value="227">Bulgaria</option>
+                      <option value="228">Burkina Faso</option>
+                      <option value="229">Burma</option>
+                      <option value="230">Burundi</option>
+                      <option value="231">Cambodia</option>
+                      <option value="232">Cameroon</option>
+                      <option value="233">Canada</option>
+                      <option value="234">Cape Verde</option>
+                      <option value="235">Central Africa</option>
+                      <option value="236">Chad</option>
+                      <option value="237">Chile</option>
+                      <option value="238">China</option>
+                      <option value="239">Colombia</option>
+                      <option value="240">Comoros</option>
+                      <option value="241">Congo, Democratic Republic of the</option>
+                      <option value="242">Costa Rica</option>
+                      <option value="243">Cote dIvoire</option>
+                      <option value="244">Crete</option>
+                      <option value="245">Croatia</option>
+                      <option value="246">Cuba</option>
+                      <option value="247">Cyprus</option>
+                      <option value="248">Czech Republic</option>
+                      <option value="249">Denmark</option>
+                      <option value="250">Djibouti</option>
+                      <option value="251">Dominican Republic</option>
+                      <option value="252">East Timor</option>
+                      <option value="253">Ecuador</option>
+                      <option value="254">Egypt</option>
+                      <option value="255">El Salvador</option>
+                      <option value="256">Equatorial Guinea</option>
+                      <option value="257">Eritrea</option>
+                      <option value="258">Estonia</option>
+                      <option value="259">Ethiopia</option>
+                      <option value="260">Fiji</option>
+                      <option value="261">Finland</option>
+                      <option value="262">France</option>
+                      <option value="263">Gabon</option>
+                      <option value="264">Gambia, The</option>
+                      <option value="265">Georgia</option>
+                      <option value="266">Germany</option>
+                      <option value="267">Ghana</option>
+                      <option value="268">Greece</option>
+                      <option value="269">Grenada</option>
+                      <option value="270">Guadeloupe</option>
+                      <option value="271">Guatemala</option>
+                      <option value="272">Guinea</option>
+                      <option value="273">Guinea-Bissau</option>
+                      <option value="274">Guyana</option>
+                      <option value="275">Haiti</option>
+                      <option value="276">Holy See</option>
+                      <option value="277">Honduras</option>
+                      <option value="278">Hong Kong</option>
+                      <option value="279">Hungary</option>
+                      <option value="280">Iceland</option>
+                      <option value="281">India</option>
+                      <option value="282">Indonesia</option>
+                      <option value="283">Iran</option>
+                      <option value="284">Iraq</option>
+                      <option value="285">Ireland</option>
+                      <option value="286">Israel</option>
+                      <option value="287">Italy</option>
+                      <option value="288">Ivory Coast</option>
+                      <option value="289">Jamaica</option>
+                      <option value="290">Japan</option>
+                      <option value="291">Jordan</option>
+                      <option value="292">Kazakhstan</option>
+                      <option value="293">Kenya</option>
+                      <option value="294">Kiribati</option>
+                      <option value="295">Korea, North</option>
+                      <option value="296">Korea, South</option>
+                      <option value="297">Kosovo</option>
+                      <option value="298">Kuwait</option>
+                      <option value="299">Kyrgyzstan</option>
+                      <option value="300">Laos</option>
+                      <option value="301">Latvia</option>
+                      <option value="302">Lebanon</option>
+                      <option value="303">Lesotho</option>
+                      <option value="304">Liberia</option>
+                      <option value="305">Libya</option>
+                      <option value="306">Liechtenstein</option>
+                      <option value="307">Lithuania</option>
+                      <option value="308">Macau</option>
+                      <option value="309">Macedonia</option>
+                      <option value="310">Madagascar</option>
+                      <option value="311">Malawi</option>
+                      <option value="312">Malaysia</option>
+                      <option value="313">Maldives</option>
+                      <option value="314">Mali</option>
+                      <option value="315">Malta</option>
+                      <option value="316">Marshall Islands</option>
+                      <option value="317">Mauritania</option>
+                      <option value="318">Mauritius</option>
+                      <option value="319">Mexico</option>
+                      <option value="320">Micronesia</option>
+                      <option value="321">Moldova</option>
+                      <option value="322">Monaco</option>
+                      <option value="323">Mongolia</option>
+                      <option value="324">Montenegro</option>
+                      <option value="325">Morocco</option>
+                      <option value="326">Mozambique</option>
+                      <option value="327">Namibia</option>
+                      <option value="328">Nauru</option>
+                      <option value="329">Nepal</option>
+                      <option value="330">Netherlands</option>
+                      <option value="331">New Zealand</option>
+                      <option value="332">Nicaragua</option>
+                      <option value="333">Niger</option>
+                      <option value="334">Nigeria</option>
+                      <option value="335">North Korea</option>
+                      <option value="336">Norway</option>
+                      <option value="337">Oman</option>
+                      <option value="338">Pakistan</option>
+                      <option value="339">Palau</option>
+                      <option value="340">Panama</option>
+                      <option value="341">Papua New Guinea</option>
+                      <option value="342">Paraguay</option>
+                      <option value="343">Peru</option>
+                      <option value="344">Philippines</option>
+                      <option value="345">Poland</option>
+                      <option value="346">Portugal</option>
+                      <option value="347">Qatar</option>
+                      <option value="348">Romania</option>
+                      <option value="349">Russia</option>
+                      <option value="350">Rwanda</option>
+                      <option value="351">Saint Lucia</option>
+                      <option value="352">Saint Vincent and the Grenadines</option>
+                      <option value="353">Samoa</option>
+                      <option value="354">San Marino</option>
+                      <option value="355">Sao Tome and Principe</option>
+                      <option value="356">Saudi Arabia</option>
+                      <option value="357">Scotland</option>
+                      <option value="358">Senegal</option>
+                      <option value="359">Serbia</option>
+                      <option value="360">Seychelles</option>
+                      <option value="361">Sierra Leone</option>
+                      <option value="362">Singapore</option>
+                      <option value="363">Slovakia</option>
+                      <option value="364">Slovenia</option>
+                      <option value="365">Solomon Islands</option>
+                      <option value="366">Somalia</option>
+                      <option value="367">South Africa</option>
+                      <option value="368">South Korea</option>
+                      <option value="369">Spain</option>
+                      <option value="370">Sri Lanka</option>
+                      <option value="371">Sudan</option>
+                      <option value="372">Suriname</option>
+                      <option value="373">Swaziland</option>
+                      <option value="374">Sweden</option>
+                      <option value="375">Switzerland</option>
+                      <option value="376">Syria</option>
+                      <option value="377">Taiwan</option>
+                      <option value="378">Tajikistan</option>
+                      <option value="379">Tanzania</option>
+                      <option value="380">Thailand</option>
+                      <option value="381">Tibet</option>
+                      <option value="382">Timor-Leste</option>
+                      <option value="383">Togo</option>
+                      <option value="384">Tonga</option>
+                      <option value="385">Trinidad and Tobago</option>
+                      <option value="386">Tunisia</option>
+                      <option value="387">Turkey</option>
+                      <option value="388">Turkmenistan</option>
+                      <option value="389">Tuvalu</option>
+                      <option value="390">Uganda</option>
+                      <option value="391">Ukraine</option>
+                      <option value="392">United Arab Emirates</option>
+                      <option value="393">United Kingdom</option>
+                      <option value="394">United States</option>
+                      <option value="395">Uruguay</option>
+                      <option value="396">Uzbekistan</option>
+                      <option value="397">Vanuatu</option>
+                      <option value="398">Venezuela</option>
+                      <option value="399">Vietnam</option>
+                      <option value="400">Yemen</option>
+                      <option value="401">Zambia</option>
+                      <option value="402">Zimbabwe</option></select>                      
+                      <label for="client_representante_legal">Representante Legal:</label>
+                                            <input class="form-control" placeholder="Representante Legal" type="text" name="client[representante_legal]" id="client_representante_legal">      
+                                            <label for="client_oficina_actual">Posee Oficina?</label>
+                                            <select name="oficina_actual" id="oficina_actual" class="form-control"><option value="1">True</option>
+                      <option value="2">False</option>
+                      <option selected="selected" value="3">Select one please</option></select>
+                                            <label for="client_correo">Correo Empresarial:</label>
+                                            <input class="form-control" placeholder="Correo Empresarial" type="text" name="client[correo]" id="client_correo">
+                                            <label for="client_telefono">Telefono:</label>
+                                            <input class="form-control" placeholder="Telefono" type="text" name="client[telefono]" id="client_telefono">
+                                            <label for="client_pagina_web">Pagina Web Empresarial:</label>
+                                            <input class="form-control" placeholder="Pagina Web Empresarial" type="text" name="client[pagina_web]" id="client_pagina_web">
+                                            <label for="client_domicilio_fiscal">Domicilio Fiscal:</label>
+                                            <input required="required" class="form-control" placeholder="Domicilio Fiscal" type="text" name="client[domicilio_fiscal]" id="client_domicilio_fiscal">
+                                            <label for="client_registro_fiscal">No NRF:</label>
+                                            <input class="form-control" placeholder="NRF" required="required" type="text" name="client[registro_fiscal]" id="client_registro_fiscal">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                      <div class="tab-pane fade in" id="datos_contacto" role="tabpanel">
+                                          <div class="row">
+                                            <div class="col-md-6 col-md-offset-3">
+                                              <label for="contact_rec_id">SERIAL:</label>
+                                              <input readonly="readonly" class="form-control" value="CNT00000006" type="text" name="contact[rec_id]" id="contact_rec_id">
+                                              <label for="contact_first_name">Primer Nombre:</label>
+                                              <input required="required" class="form-control" placeholder="Primer Nombre" type="text" name="contact[first_name]" id="contact_first_name">
+                                              <label id="contact_first_name-error" class="error" style="display: none;" for="contact_first_name">This field is required.</label>
+                                              <label for="contact_middle_name">Segundo Nombre:</label>
+                                              <input required="required" class="form-control" placeholder="Segundo Nombre" type="text" name="contact[middle_name]" id="contact_middle_name">
+                                              <label id="contact_middle_name-error" class="error" style="display: none;" for="contact_middle_name">This field is required.</label>
+                                              <label for="contact_last_name">Primer Apellido:</label>
+                                              <input required="required" class="form-control" placeholder="Primer Apellido" type="text" name="contact[last_name]" id="contact_last_name">
+                                              <label id="contact_last_name-error" class="error" style="display: none;" for="contact_last_name">This field is required.</label>
+                                              <label for="contact_sur_name">Segundo Apellido:</label>
+                                              <input required="required" class="form-control" placeholder="Segundo Apellido" type="text" name="contact[sur_name]" id="contact_sur_name">
+                                              <label id="contact_sur_name-error" class="error" style="display: none;" for="contact_sur_name">This field is required.</label>
+                                              <label for="contact_dui">DUI:</label>
+                                              <input class="form-control" placeholder="DUI" type="text" name="contact[dui]" id="contact_dui">
+                                              <label for="contact_nit">NIT:</label>
+                                              <input class="form-control" placeholder="NIT" type="text" name="contact[nit]" id="contact_nit">
+                                              <label for="contact_phone_contact">Telefono de Contacto:</label>
+                                              <input required="required" class="form-control" placeholder="Telefono de Contacto" type="text" name="contact[phone_contact]" id="contact_phone_contact">
+                                              <label id="client_dui-error" class="error fade in" for="contact_phone_contact" style="display: none;">This field is required.</label>
+                                              <label for="contact_mobil_contact">No Celular:</label>
+                                              <input class="form-control" placeholder="Numero de Celular" required="required" type="text" name="contact[mobil_contact]" id="contact_mobil_contact">
+                                              <label id="client_nit-error" class="error fade in" for="contact_mobil_contact" style="display: none;">This field is required.</label>
+                                              <label for="contact_email">Correo electronico:</label>
+                                              <input class="form-control" placeholder="Correo electronico" type="text" name="contact[email]" id="contact_email">
+                                              <label for="contact_position_id">Posicion en la que trabaja:</label>
+                                              <select class="form-control" name="position[position_id]" id="position_position_id"><option value="">Please select</option>
+                        <option value="1">Secretaria</option>
+                        <option value="2">Programador</option>
+                        <option value="3">Secretaria</option>
+                        <option value="4">Programador</option></select>                      
+                                            </div>
+                                          </div>
+
+                                      </div>
               </div>
-              <div class="tab-pane" id="datos_contacto" role="tabpanel">
-                <div id="Datos" class="tab-pane fade in">
-               <%= form_for Contact.new, as: :contact, url: admin_client_index_path, method: :post, html: { class: "new_client", id: "new_contact_form" } do |f| %>
-                  <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                      <%= f.label :rec_id,"SERIAL:"%>
-                      <%= f.text_field :rec_id,:readonly => true, class: 'form-control', value: "CNT0000000#{Contact.maximum(:id).to_i + 1}"%>
-                      <%= f.label :first_name,"Primer Nombre:"%>
-                      <%= f.text_field :first_name ,  required: true, class: 'form-control', placeholder: 'Primer Nombre' %>
-                      <%= f.label :middle_name,"Segundo Nombre:"%>
-                      <%= f.text_field :middle_name ,  required: true, class: 'form-control', placeholder: 'Segundo Nombre' %>
-                      <%= f.label :last_name,"Primer Apellido:"%>
-                      <%= f.text_field :last_name ,  required: true, class: 'form-control', placeholder: 'Primer Apellido' %>
-                      <%= f.label :sur_name,"Segundo Apellido:"%>
-                      <%= f.text_field :sur_name ,  required: true, class: 'form-control', placeholder: 'Segundo Apellido' %>
-                      <%= f.label :dui,"DUI:"%>
-                      <%= f.text_field :dui , class: 'form-control', placeholder: 'DUI' %>
-                      <%= f.label :nit,"NIT:"%>
-                      <%= f.text_field :nit , class: 'form-control', placeholder: 'NIT' %>
-                      <%= f.label :phone_contact,"Telefono de Contacto:"%>
-                      <%= f.text_field :phone_contact, required: true, class: 'form-control', placeholder: 'Telefono de Contacto' %>
-                      <label id="client_dui-error" class="error fade in" for="client_nombre" style="display: none;">This field is required.</label>
-                      <%= f.label :mobil_contact,"No Celular:"%>
-                      <%= f.text_field :mobil_contact, class: 'form-control', placeholder: 'Numero de Celular', required: true%>
-                      <label id="client_nit-error" class="error fade in" for="client_nombre" style="display: none;">This field is required.</label>
-                      <%= f.label :email,"Correo electronico:"%>
-                      <%= f.text_field :email, class: 'form-control', placeholder: 'Correo electronico'%>
-                      <%= f.label :position_id,"Posicion en la que trabaja:"%>
-                      <%= collection_select(:position, :position_id, Position.all, :id, :name_with_initial, {:prompt=>true}, {:class=>'form-control'}) -%>
-                      <%= f.submit "Create" %>
-                    </div>
-                  </div>
-                </div>
-                <% end %>
-              </div>
+              <input type="submit" name="commit" value="Crear" class="btn btn-primary submit display-none">
+                      </form>
             </div>
            <!-- <input type="button" name="commit" value="Crear" class="btn btn-primary submit">-->
           </div>
@@ -152,68 +567,76 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
-    
-    $("input[name=commit]").one('click', function(){
-      var client =  $("#new_client").serializeArray();
-      var contact = $("#new_contact_form").serializeArray();
-      console.log(client);
-      /*$.ajax({
-        type: "POST",
-        url: "/admin/client",
-        data: {
-          client: client, 
-          contact: contact
-        },
-        success: function(data){
-          console.log(data);
-        },
-        error: function(error){
-          console.log(error);
-        }
-      });*/
-    });
+    $(".error").hide();
+  $("#new_client").validate({
+    invalidHandler: function(event, validator) {
+    // 'this' refers to the form
+      //console.log(validator);
+      //console.log(event);
+      var errors = validator.numberOfInvalids();
+        if (errors) {
+          var message = errors == 1
+            ? 'You missed 1 field. It has been highlighted'
+            : 'You missed ' + errors + ' fields. They have been highlighted';
+          toastr.error('You have some required fields incompleted, please fullfil the form correctly.', 'Error!');
+          //console.log(message);
 
-  $("#new_client").validate();
+          //$(".error").show();
+        }   else {
+          //$(".error").hide();
+        }
+      },
+      rules: {
+        client: {
+          required: true,
+        }
+      }
+  });
   $("#client_nombre").inputmask('Regex', {
     casing: "upper"
   });
-    $("#client_dui").inputmask("99999999-9", 
+    $("#client_nit").inputmask("99999999-9", 
       { 
         "onincomplete":  function(){ 
-
+          toastr.error('This input Must be like ########-#.', 'Error!', {timeOut: 3000})
         } 
       });
     $("#contact_dui").inputmask("99999999-9", 
       { 
         "onincomplete":  function(){ 
-          
+          toastr.error('This input Must be like ########-#.', 'Error!', {timeOut: 3000})
         } 
       });
 
     $("#contact_nit").inputmask("9999-999999-999-9", { 
         "onincomplete":  function(){ 
-          $("#client_nit-error").show();
-          $("#client_nit-error").html("Must be like ####-######-###-#");
+          toastr.error('This input Must be like ########-#.', 'Error!', {timeOut: 3000})
         } 
       });    
     
     $("#client_registro_fiscal").inputmask("999999-9", 
       { 
         "onincomplete":  function(){ 
-          $("#client_dui-error").show();
-          $("#client_dui-error").html("Must be like ########-#");
+          toastr.error('This input Must be like ########-#.', 'Error!', {timeOut: 3000})
         } 
       });
     $("#client_telefono").inputmask("9999-9999", 
       { 
         "onincomplete":  function(){ 
-          $("#client_dui-error").show();
-          $("#client_dui-error").html("Must be like ########-#");
+          toastr.error('This input Must be like ########-#.', 'Error!', {timeOut: 3000})
         } 
       });
     
-    $("#contact_mobil_contact").inputmask("9999-9999");
-    $("#contact_phone_contact").inputmask("9999-9999");
+    $("#contact_mobil_contact").inputmask("9999-9999", { 
+        "onincomplete":  function(){ 
+          toastr.error('This input Must be like ########-#.', 'Error!', {timeOut: 3000})
+        } 
+      });
+    $("#contact_phone_contact").inputmask("9999-9999", { 
+        "onincomplete":  function(){ 
+          toastr.error('This input Must be like ####-####.', 'Error!', {timeOut: 3000})
+        } 
+      });
 
     
     Inputmask("url").mask("#client_pagina_web");
@@ -223,14 +646,24 @@
     
     $("#client_nit").inputmask("9999-999999-999-9", { 
         "onincomplete":  function(){ 
-          $("#client_nit-error").show();
-          $("#client_nit-error").html("Must be like ####-######-###-#");
+          toastr.error('This input Must be like ########-#.', 'Error!', {timeOut: 3000})
         } 
       });
-    //$("#new_client").validate();
+
+    $("#datos_contacto").css({"visibility":"hidden","position":"fixed"});
+    $("a[href='#datos_contacto']").click(function(){
+      $("#datos_contacto").removeAttr("style");
+      $("#datos_empresa").css({"visibility":"hidden","position":"fixed"});
+    });
+
+    $("a[href='#datos_empresa']").click(function(){
+      $("#datos_contacto").css({"visibility":"hidden","position":"fixed"});
+      $("#datos_empresa").removeAttr("style");
+    });
+  
   });
 
-  
+
 </script>
 
 

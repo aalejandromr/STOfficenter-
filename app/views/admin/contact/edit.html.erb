@@ -1,0 +1,94 @@
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3> CONTACT - <%= @ContactFound.rec_id %></h3>
+      </div>
+
+      <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">Go!</button>
+                          </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel" style="min-height: 600px;">
+          <div class="x_title">
+            <h2>Update Client</h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Settings 1</a>
+                  </li>
+                  <li><a href="#">Settings 2</a>
+                  </li>
+                </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix">
+              
+            </div>
+          </div>
+          <div class="x_body">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item active">
+              <a class="nav-link" data-toggle="tab" href="#datos_empresa" role="tab">Datos de Contacto</a>
+            </li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+              <div class="tab-pane active" id="datos_empresa" role="tabpanel">
+                <div id="Datos" class="tab-pane fade in">
+               <%= form_for @ContactFound, as: :contact, url: admin_contact_path, method: :patch, html: { class: "new_client", id: "new_client" } do |f| %>
+                  <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                      <%= f.label :rec_id, "SERIAL:"%>
+                      <%= f.text_field :rec_id,:readonly => true, class: 'form-control', value: @ContactFound.rec_id%>
+                      <%= f.label :first_name,"Primer Nombre:"%>
+                      <%= f.text_field :first_name ,  required: true, class: 'form-control', placeholder: 'Primer Nombre' %>
+                      <%= f.label :middle_name,"Seguno Nombre:"%>
+                      <%= f.text_field :middle_name ,  required: true, class: 'form-control', placeholder: 'Segundo Nombre' %>
+                      <%= f.label :sur_name,"Primer Apellido:"%>
+                      <%= f.text_field :sur_name ,  required: true, class: 'form-control', placeholder: 'Primer Apellido' %>
+                      <%= f.label :last_name,"Segundo Apellido:"%>
+                      <%= f.text_field :last_name ,  required: true, class: 'form-control', placeholder: 'Segundo Apellido' %>
+                      <%= f.label :phone_contact,"No Telefonico:"%>
+                      <%= f.text_field :phone_contact, class: 'form-control', placeholder: 'Numero Telefonico'%>
+                      <%= f.label :mobil_contact, "No Celular:"%>
+                      <%= f.text_field :mobil_contact , class: 'form-control', placeholder: 'No Celular' %>
+                      <%= f.label :email,"Email:"%>
+                      <%= f.text_field :email, class: 'form-control', placeholder: 'Email'%>
+                      <%= f.label :nit,"No NIT:"%>
+                      <%= f.text_field :nit, class: 'form-control', placeholder: 'NIT', required: true%>
+                      <%= f.label :dui,"DUI:"%>
+                      <%= f.number_field :dui, class: 'form-control', placeholder: 'DUI'%>
+                      <%= f.submit "Modificar", class: 'btn btn-primary submit' %>
+                    <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

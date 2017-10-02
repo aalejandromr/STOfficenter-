@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170918005124) do
+ActiveRecord::Schema.define(version: 20171001222401) do
 
   create_table "calles", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -75,9 +75,28 @@ ActiveRecord::Schema.define(version: 20170918005124) do
     t.string   "rec_id",        limit: 255
     t.string   "dui",           limit: 255
     t.string   "nit",           limit: 255
+    t.integer  "client_id",     limit: 4
   end
 
+  add_index "contacts", ["client_id"], name: "index_contacts_on_client_id", using: :btree
   add_index "contacts", ["position_id"], name: "fk_rails_fd87a032bf", using: :btree
+
+  create_table "contracts", force: :cascade do |t|
+    t.string   "servicio_contratado",          limit: 255
+    t.string   "centro_de_negocio",            limit: 255
+    t.string   "condicion",                    limit: 255
+    t.date     "fecha_de_contratacion"
+    t.string   "nit_representante_legal",      limit: 255
+    t.string   "dui_representante_legal",      limit: 255
+    t.string   "telefono_representante_legal", limit: 255
+    t.string   "correo_representante_legal",   limit: 255
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "client_id",                    limit: 4
+    t.string   "rec_id",                       limit: 255
+  end
+
+  add_index "contracts", ["client_id"], name: "index_contracts_on_client_id", using: :btree
 
   create_table "direccion_clients", force: :cascade do |t|
     t.integer  "direccions_id", limit: 4
