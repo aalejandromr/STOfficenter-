@@ -63,9 +63,69 @@
                 <div id="Datos" class="tab-pane fade in">
                   <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-                      <%= form_for @ClientFound, as: :client, url: admin_client_path, method: :patch, html: { class: "new_client", id: "new_client" } do |f| %>
+                      <%= form_for @Contract, as: :contract, url: generate_contract_admin_contract_index_path, method: :patch, html: { class: "new_contract", id: "new_contract" } do |f| %>
                         <%= f.label :rec_id, "SERIAL:"%>
-                        <%= f.text_field :rec_id,:readonly => true, class: 'form-control', value: @ClientFound.rec_id%>
+                        <%= f.text_field :rec_id,:readonly => true, class: 'form-control', value: @Contract.rec_id%>
+                        <%= f.text_field :id,:hidden => true, class: 'form-control', value: @Contract.id%>s
+                        <%= f.label :tipo_documento_id, "Tipo Documento" %>
+                        <%= select_tag "Tipo Documento", options_from_collection_for_select(TipoDocumento.all, "id", "tipoDocumento"), class: 'form-control' %>
+                        <%= f.label :cantidadEmpleados, "Cantidad de Empleados: "%>
+                        <%= f.number_field :cantidadEmpleados, class: 'form-control' %>
+
+                        
+                        <%= f.label :servicio_contratado, "Servicio a Contratar" %>
+                        <%= f.text_field :servicio_contratado, class: 'form-control', placeholder: 'Servicio a Contratar' %>
+                        <%= f.label :centro_de_negocio, "Centro de Negocio" %>
+                        <%= f.text_field :centro_de_negocio, class: 'form-control', placeholder: 'Servicio a Contratar'%>
+                        <%= f.label :condicion, "Condicion Especial" %>
+                        <%= f.text_field :condicion, class: 'form-control', placeholder: 'Condicion Especial'%>
+                        <%= f.label :fecha_de_contratacion, "Fecha de contratacion" %>
+                        <%= f.date_field :fecha_de_contratacion, class: 'form-control', placeholder: 'Fecha de Inicio de la Contratacion'%>
+                        <%= f.label :final_contrato, "Fecha de finalizacion" %>
+                        <%= f.date_field :final_contrato, class: 'form-control', placeholder: 'Fecha finalizacion'%>
+                        <%= f.label :periodo_facturacion_id, "Periodo de Facturacion" %>
+                        <%= select_tag "Periodo Facturacion", options_from_collection_for_select(PeriodoFacturacion.all, "id", "periodo"), class: 'form-control' %>
+                        <%= f.label :deposito, "Deposito" %>
+                        <%= select_tag "Deposito", "<option value=1 selected>True</option><option value=2>False</option>".html_safe, multiple: true, id: 'deposito_id', class: 'form-control' %>
+
+                        <%= f.label :montoDeposito, "Monto Deposito" %>
+                        <%= f.text_field :montoDeposito, class: 'form-control', placeholder: 'Monto Deposito' %>
+
+                        <%= f.label :usoTelefono, "Uso del Telefono" %>
+                        <%= select_tag "Uso del Telefono", "<option value=1 selected>True</option><option value=2>False</option>".html_safe, multiple: true, id: 'uso_telefono_id', class: 'form-control' %>
+
+                        <%= f.label :minutosAlMes, "Minutos al Mes" %>
+                        <%= f.text_field :minutosAlMes, class: 'form-control', placeholder: 'Minutos Al Mes' %>
+
+                        <%= f.label :llamadasExtranjero, "Llamadas al Extrajero" %>
+                        <%= select_tag "Llamadas al extranjero", "<option value=1 selected>True</option><option value=2>False</option>".html_safe, multiple: true, id: 'llamadas_extranjero_id', class: 'form-control' %>
+
+                        <%= f.label :usoSalaConferencias, "Uso sala de conferencias" %>
+                        <%= select_tag "Uso sala de conferencias", "<option value=1 selected>True</option><option value=2>False</option>".html_safe, multiple: true, id: 'uso_sala_conferencias_id', class: 'form-control' %>
+
+                        <%= f.label :usoSaltaConferenciaHoras, "Horas de uso de Salas" %>
+                        <%= f.number_field :usoSaltaConferenciaHoras, class: 'form-control', placeholder: 'Uso de Horas de Salas de Conferencias' %>
+
+                        <%= f.label :parqueosAsignados, "Parqueos Asignados" %>
+
+                        <%= f.number_field :parqueosAsignados, class: 'form-control', placeholder: 'Parqueos Asignados' %>
+
+                        
+                        <%= f.label :nit_representante_legal, "NIT del Representante Legal" %>
+                        <%= f.text_field :nit_representante_legal, class: 'form-control', placeholder: 'NIT del Representante Legal'%>
+                        <%= f.label :dui_representante_legal, "DUI Representante Legal" %>
+                        <%= f.text_field :dui_representante_legal, class: 'form-control', placeholder: 'Representante Legal'%>
+                        <%= f.label :telefono_representante_legal, "Telefono Representante Legal" %>
+                        <%= f.text_field :telefono_representante_legal, class: 'form-control', placeholder: 'Telefono Representante Legal'%>
+                        <%= f.label :tipo_contrato_id, "Tipo Contrato" %>
+                        <%= select_tag "Tipo Contrato", options_from_collection_for_select(TipoContrato.all, "id", "tipoContrato"), class: 'form-control' %>
+                        
+                        <%= f.label :oficina_id, "Oficina" %>
+                        <%= select_tag "Oficina", options_from_collection_for_select(Oficina.all, "id", "name"), class: 'form-control' %>
+                        <%= f.label :correo_representante_legal, "Correo Representante Legal" %>
+                        <%= f.text_field :correo_representante_legal, class: 'form-control', placeholder: 'Correo Representante Legal'%>
+                        
+                        <%= f.submit "Generar Contrato", class: 'btn btn-primary submit' %>
                       <% end %>
                     </div>
                   </div>
@@ -124,8 +184,6 @@
     </div>
   </div>
 </div>
-
-
 
 <style type="text/css">
   

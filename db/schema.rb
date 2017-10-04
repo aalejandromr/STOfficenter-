@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171001222401) do
+ActiveRecord::Schema.define(version: 20171004064737) do
 
   create_table "calles", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -94,9 +94,27 @@ ActiveRecord::Schema.define(version: 20171001222401) do
     t.datetime "updated_at",                               null: false
     t.integer  "client_id",                    limit: 4
     t.string   "rec_id",                       limit: 255
+    t.integer  "tipo_contrato_id",             limit: 4
+    t.integer  "tipo_documento_id",            limit: 4
+    t.integer  "oficina_id",                   limit: 4
+    t.integer  "cantidadEmpleados",            limit: 4
+    t.date     "final_contrato"
+    t.boolean  "deposito"
+    t.float    "montoDeposito",                limit: 24
+    t.boolean  "usoTelefono"
+    t.integer  "minutosAlMes",                 limit: 4
+    t.boolean  "llamadasExtrajero"
+    t.boolean  "usoSalaConferencias"
+    t.float    "usoSaltaConferenciaHoras",     limit: 24
+    t.integer  "parqueosAsignados",            limit: 4
+    t.integer  "periodo_facturacion_id",       limit: 4
   end
 
   add_index "contracts", ["client_id"], name: "index_contracts_on_client_id", using: :btree
+  add_index "contracts", ["oficina_id"], name: "index_contracts_on_oficina_id", using: :btree
+  add_index "contracts", ["periodo_facturacion_id"], name: "index_contracts_on_periodo_facturacion_id", using: :btree
+  add_index "contracts", ["tipo_contrato_id"], name: "index_contracts_on_tipo_contrato_id", using: :btree
+  add_index "contracts", ["tipo_documento_id"], name: "index_contracts_on_tipo_documento_id", using: :btree
 
   create_table "direccion_clients", force: :cascade do |t|
     t.integer  "direccions_id", limit: 4
@@ -113,10 +131,23 @@ ActiveRecord::Schema.define(version: 20171001222401) do
     t.string   "ubicacion",       limit: 255
   end
 
+  create_table "oficinas", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "direccion",  limit: 255
+  end
+
   create_table "pais_origens", force: :cascade do |t|
     t.string   "description", limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "periodo_facturacions", force: :cascade do |t|
+    t.string   "periodo",    limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "places", force: :cascade do |t|
@@ -142,6 +173,18 @@ ActiveRecord::Schema.define(version: 20171001222401) do
     t.string   "description", limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "tipo_contratos", force: :cascade do |t|
+    t.string   "tipoContrato", limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "tipo_documentos", force: :cascade do |t|
+    t.string   "tipoDocumento", limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -174,5 +217,9 @@ ActiveRecord::Schema.define(version: 20171001222401) do
   add_foreign_key "clients", "direccions"
   add_foreign_key "clients", "pais_origens"
   add_foreign_key "contacts", "positions"
+  add_foreign_key "contracts", "oficinas"
+  add_foreign_key "contracts", "periodo_facturacions"
+  add_foreign_key "contracts", "tipo_contratos"
+  add_foreign_key "contracts", "tipo_documentos"
   add_foreign_key "users", "rols"
 end

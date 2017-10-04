@@ -13,7 +13,13 @@ Rails.application.routes.draw do
     end
 
     namespace :admin do
-      resources :admin, :contact, :contract
+      resources :admin, :contact
+      resources :contract do
+        collection do
+          patch 'generate_contract'
+          get 'prueba'
+        end
+      end
       resources :client do
         collection do
           delete 'active_client'
