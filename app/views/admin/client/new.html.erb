@@ -67,7 +67,7 @@
                   <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                       <label for="client_rec_id">SERIAL:</label>
-                      <input readonly="readonly" class="form-control" value="CLNT000000011" type="text" name="client[rec_id]" id="client_rec_id">
+                      <input readonly="readonly" class="form-control" value=<%=  "CLNT0000000#{Client.count + 1}" %> type="text" name="client[rec_id]" id="client_rec_id">
                       <label for="client_nombre">Nombre Empresa:</label>
                       <input required="required" class="form-control" placeholder="Nombre Empresa" data-inputmask-regex="[a-zA-Z ]*" type="text" name="client[nombre]" id="client_nombre">
                       <label id="client_nombre-error" class="error" style="display: none;" for="client_nombre">This field is required.</label>
@@ -517,7 +517,7 @@
                                           <div class="row">
                                             <div class="col-md-6 col-md-offset-3">
                                               <label for="contact_rec_id">SERIAL:</label>
-                                              <input readonly="readonly" class="form-control" value="CNT00000006" type="text" name="contact[rec_id]" id="contact_rec_id">
+                                              <input readonly="readonly" class="form-control" value=<%= "CNT0000000#{Contact.count + 1}"%> type="text" name="contact[rec_id]" id="contact_rec_id">
                                               <label for="contact_first_name">Primer Nombre:</label>
                                               <input required="required" class="form-control" placeholder="Primer Nombre" type="text" name="contact[first_name]" id="contact_first_name">
                                               <label id="contact_first_name-error" class="error" style="display: none;" for="contact_first_name">This field is required.</label>

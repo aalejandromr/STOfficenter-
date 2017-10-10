@@ -68,9 +68,9 @@
                         <%= f.text_field :rec_id,:readonly => true, class: 'form-control', value: @Contract.rec_id%>
                         <%= f.text_field :id,:hidden => true, class: 'form-control', value: @Contract.id%>s
                         <%= f.label :tipo_documento_id, "Tipo Documento" %>
-                        <%= select_tag "Tipo Documento", options_from_collection_for_select(TipoDocumento.all, "id", "tipoDocumento"), class: 'form-control' %>
+                        <%= select_tag "Tipo Documento", options_from_collection_for_select(TipoDocumento.all, "id", "tipoDocumento"), class: 'form-control', required: true %>
                         <%= f.label :cantidadEmpleados, "Cantidad de Empleados: "%>
-                        <%= f.number_field :cantidadEmpleados, class: 'form-control' %>
+                        <%= f.number_field :cantidadEmpleados, class: 'form-control', required: true %>
 
                         
                         <%= f.label :servicio_contratado, "Servicio a Contratar" %>
@@ -196,8 +196,16 @@
 </style>
 
 
-
-
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#new_contract').validate({
+      invalidHandler: function(event, validator){
+        toastr.error('You are missing required inputs', 'Error!', {timeOut: 3000});
+      }
+    });
+  });
+  
+</script>
 
 
 

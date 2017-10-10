@@ -54,18 +54,24 @@ class Admin::ContractController < ApplicationController
 			oficinas.*, 
 			tipo_documentos.*, 
 			tipo_contratos.*").find(contract["id"])
+			#abort(info.periodo_facturacion.periodo)
+			#abort(info.client.inspect)
 
 		doc = DocxReplace::Doc.new("#{Rails.root}/lib/docx_templates/CONTRATO_MATRIZ.docx", "#{Rails.root}/tmp")
 	    # Replace some variables. $var$ convention is used here, but not required.
 	    doc.replace("$NOMBRE_CLIENTE$", info.client.nombre)
 	    doc.replace("$DUI_CLIENTE$", info.client.nombre)
 	    doc.replace("$OFICINA$", info.oficina.name)
-	    doc.replace("$PLAZO_CONTRATO$", info.periodo_facturacion.periodo) #FALLO
+	    doc.replace("$var$", info.client.fecha_de_constitucion)
+	    doc.replace("$123$", info.periodo_facturacion.periodo) #FALLO
+	    doc.replace("$123_2$", info.periodo_facturacion.periodo.to_s)
+	    doc.replace("$PLAZO_CONTRATO_3$", info.periodo_facturacion.periodo)
 	    doc.replace("$FECHA_DE_INICIO_DEL_CONTRATO$", info.fecha_de_contratacion)
 	    doc.replace("$DEPOSITO_CLIENTE$", info.montoDeposito)
 	    doc.replace("$RUBRO_CLIENTE$", info.client.sector_economico)
 	    doc.replace("$CONSTITUCION_DE_LA_EMPRESA$", info.client.fecha_de_constitucion) #FALLO
 	    doc.replace("$NOMBRE_COMERCIAL$", info.client.nombre_comercial)
+	    doc.replace("$CANTIDAD_DE_EMPLEADOS$", info.cantidadEmpleados)
 	    # Write the document back to a temporary file
 	    tmp_file = Tempfile.new('word_tempate', "#{Rails.root}/tmp")
 	    doc.commit(tmp_file.path)
