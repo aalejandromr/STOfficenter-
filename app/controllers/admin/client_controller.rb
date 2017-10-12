@@ -39,7 +39,7 @@ class Admin::ClientController < ApplicationController
 
 	def update
 		cliente = params[:client]
-		client = Client.find(id: params[:id])
+		client = Client.find(params[:id])
 		result = client.update_attributes(
 			:nombre => cliente[:nombre],  
 			:nit => cliente[:nit],
