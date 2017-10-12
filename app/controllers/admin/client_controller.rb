@@ -15,31 +15,31 @@ class Admin::ClientController < ApplicationController
 	end
 
 	def edit
-		@ClientFound = Client.find_by(rec_id: params[:id])
+		@ClientFound = Client.find(params[:id])
 		@AllClientContact = Contact.where(client_id: @ClientFound.id)
 	end
 
 	def destroy
-		cliente = Client.where(rec_id: params[:id])
+		cliente = Client.where(id: params[:id])
 		Client.update(cliente[0].id, status: false)
 		render :json => cliente
 	end
 
 	def active_client
-		cliente = Client.where(rec_id: params[:id])
+		cliente = Client.where(id: params[:id])
 		Client.update(cliente[0].id, status: true)
 		render :json => cliente
 	end
 
 	def inactive_client
-		cliente = Client.where(rec_id: params[:id])
+		cliente = Client.where(id: params[:id])
 		Client.update(cliente[0].id, status: false)
 		render :json => cliente
 	end
 
 	def update
 		cliente = params[:client]
-		client = Client.find_by(rec_id: params[:id])
+		client = Client.find(id: params[:id])
 		result = client.update_attributes(
 			:nombre => cliente[:nombre],  
 			:nit => cliente[:nit],
@@ -111,7 +111,7 @@ class Admin::ClientController < ApplicationController
 	end
 
 	def show
-		cliente = Client.find_by(rec_id: params[:id])
+		cliente = Client.find(id: params[:id])
 		render :json => cliente
 	end
 
