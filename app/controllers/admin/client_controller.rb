@@ -111,7 +111,7 @@ class Admin::ClientController < ApplicationController
 	end
 
 	def show
-		cliente = Client.find(id: params[:id])
+		cliente = Client.find(params[:id])
 		render :json => cliente
 	end
 
