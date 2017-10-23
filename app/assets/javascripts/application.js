@@ -41,6 +41,9 @@
 //= require  js/nprogress.js
 
 //= require flash.js
+//= require moment
+//= require bootstrap-datetimepicker
 //= require_tree ./admin
+
 
 

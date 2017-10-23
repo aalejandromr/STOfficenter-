@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171004064737) do
+ActiveRecord::Schema.define(version: 20171022194510) do
 
   create_table "calles", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20171004064737) do
     t.string   "nit",                   limit: 255, default: "", null: false
     t.string   "giroEmpresa",           limit: 255
     t.integer  "cantidadEmpleados",     limit: 4
-    t.date     "fecha_de_constitucion"
+    t.string   "fecha_de_constitucion", limit: 255
     t.boolean  "empresaNacional"
     t.integer  "pais_origen_id",        limit: 4
     t.datetime "created_at",                                     null: false
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 20171004064737) do
     t.string   "servicio_contratado",          limit: 255
     t.string   "centro_de_negocio",            limit: 255
     t.string   "condicion",                    limit: 255
-    t.date     "fecha_de_contratacion"
+    t.string   "fecha_de_contratacion",        limit: 255
     t.string   "nit_representante_legal",      limit: 255
     t.string   "dui_representante_legal",      limit: 255
     t.string   "telefono_representante_legal", limit: 255
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20171004064737) do
     t.integer  "tipo_documento_id",            limit: 4
     t.integer  "oficina_id",                   limit: 4
     t.integer  "cantidadEmpleados",            limit: 4
-    t.date     "final_contrato"
+    t.string   "final_contrato",               limit: 255
     t.boolean  "deposito"
     t.float    "montoDeposito",                limit: 24
     t.boolean  "usoTelefono"
@@ -108,11 +108,16 @@ ActiveRecord::Schema.define(version: 20171004064737) do
     t.float    "usoSaltaConferenciaHoras",     limit: 24
     t.integer  "parqueosAsignados",            limit: 4
     t.integer  "periodo_facturacion_id",       limit: 4
+    t.boolean  "status"
+    t.string   "requester",                    limit: 255
+    t.integer  "requester_id",                 limit: 4
+    t.string   "contract_doc",                 limit: 255
   end
 
   add_index "contracts", ["client_id"], name: "index_contracts_on_client_id", using: :btree
   add_index "contracts", ["oficina_id"], name: "index_contracts_on_oficina_id", using: :btree
   add_index "contracts", ["periodo_facturacion_id"], name: "index_contracts_on_periodo_facturacion_id", using: :btree
+  add_index "contracts", ["requester_id"], name: "index_contracts_on_requester_id", using: :btree
   add_index "contracts", ["tipo_contrato_id"], name: "index_contracts_on_tipo_contrato_id", using: :btree
   add_index "contracts", ["tipo_documento_id"], name: "index_contracts_on_tipo_documento_id", using: :btree
 
@@ -136,6 +141,11 @@ ActiveRecord::Schema.define(version: 20171004064737) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.string   "direccion",  limit: 255
+  end
+
+  create_table "pais", primary_key: "idPais", force: :cascade do |t|
+    t.string  "pais",    limit: 30, null: false
+    t.integer "codArea", limit: 4,  null: false
   end
 
   create_table "pais_origens", force: :cascade do |t|

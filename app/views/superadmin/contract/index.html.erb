@@ -1,0 +1,122 @@
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>CONTRATOS POR APROBAR</h3>
+      </div>
+
+      <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">Go!</button>
+                          </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel" style="height:600px;">
+          <div class="x_title">
+            <h2> Tienes <%= "#{@toApprove.count}"%> contrato(s) que Aprobar </h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Settings 1</a>
+                  </li>
+                  <li><a href="#">Settings 2</a>
+                  </li>
+                </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_body">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item active">
+              <a class="nav-link" data-toggle="tab" href="#see_all_active" role="tab"> Active(s)</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#see_all_inactive" role="tab">Inactive(s)</a>
+            </li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+              <div class="tab-pane fade in active" id="see_all_active" role="tabpanel">
+                  <table class="table active-all">
+                    <thead>
+                      <tr>
+                        <th>REC ID</th>
+                        <th>SERVICIO CONTRATADO</th>
+                        <th> CLIENTE </th>
+                        <th> APROBAR </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% @toApprove.each do |toApprove| %>
+                        <tr>
+                          <th scope="row"> <%= toApprove.rec_id %> </th>
+                          <th> <%= toApprove.servicio_contratado %> </th>
+                          <th scope="row"> <%= Client.find(toApprove.client_id).nombre %> </th>
+                          <th> <a id="<%= toApprove.id %>" class="Aprobar" href="#"> Aprobar </a> </th>
+                        </tr>
+                      
+                    <% end %>
+                    </tbody>
+                  </table>
+                </div>
+
+            </div>
+          </div>
+            
+          </div>
+          <div class="x_body">
+          
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("a.Aprobar").click(function(){
+            var elementId = this.getAttribute('id');
+            $.ajax({
+                type: "DELETE",
+                //dataType: 'json',
+                url: "/superadmin/contract/approve_contract",
+                data: { id : elementId },    // multiple data sent using ajax
+                success: function (data) {
+                    swal(
+                      'Actived!',
+                      'Contrato Aprobado',
+                      'success'
+                    );
+                },
+                error: function (error, ajaxContext) {
+                  swal(
+                  'Fracaso!',
+                  'Algo salio mal.',
+                  'error'
+                  )
+                }
+             });
+          });
+    });
+</script>

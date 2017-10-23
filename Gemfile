@@ -35,9 +35,11 @@ gem 'devise'
 gem 'docx_replace'
 # Use Unicorn as the app server
 # gem 'unicorn'
-
+gem 'libreconv'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 group :production do
 	gem 'pg', '0.20'
 	gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'

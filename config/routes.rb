@@ -18,6 +18,8 @@ Rails.application.routes.draw do
         collection do
           patch 'generate_contract'
           get 'prueba'
+          get 'all'
+          get 'download_contract'
         end
       end
       resources :client do
@@ -30,6 +32,15 @@ Rails.application.routes.draw do
         collection do
           get 'reset_user_password'
           patch 'reset_user_password_action'
+        end
+      end
+    end
+
+    namespace :superadmin do
+      resources :superadmin
+      resources :contract do
+        collection do
+          delete 'approve_contract'
         end
       end
     end

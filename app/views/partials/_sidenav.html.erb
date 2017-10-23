@@ -35,10 +35,25 @@
                   <ul class="nav child_menu" style="display: none">
                     <li> <%= link_to('See all', admin_client_index_path, method: :get) %> 
                     <li><%= link_to('Create New', "#{new_admin_client_path}", method: :get) %> 
+                    <li><%= link_to('All Contracts', "#{all_admin_contract_index_path}", method: :get) %> 
                     
                     </li>
                   </ul>
                 </li>
+                
+              
+            <% end %>
+
+            <% if current_user.rol_id == 1 %>
+              <li>
+                <a>
+                  <i class="fa fa-bar-chart-o"></i> Contractos <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="display: none">
+                    <li> 
+                      <%= link_to('Aprobar Contractos', superadmin_contract_index_path , method: :get) %> 
+                    </li>
+                  </ul>
+              </li>
                 
               
             <% end %>

@@ -78,7 +78,26 @@
                       <%= f.label :cantidadEmpleados,"CANTIDAD DE EMPLEADOS:"%>
                       <%= f.number_field :cantidadEmpleados, class: 'form-control', placeholder: 'Cantidad de Empleados'%>
                       <%= f.label :fecha_de_constitucion,"FECHA DE CONSTITUCION DE LA EMPRESA:"%>
-                      <%= f.date_field :fecha_de_constitucion, class: 'form-control'%>
+                      <div class="row">
+                          <div class='col-sm-12'>
+                              <div class="form-group">
+                                  <div class='input-group date' id='datetimepicker'>
+                                      <%= f.text_field :fecha_de_constitucion, class: 'form-control'%>
+                                      <span class="input-group-addon">
+                                          <span class="glyphicon glyphicon-calendar"></span>
+                                      </span>
+                                  </div>
+                              </div>
+                          </div>
+                          <script type="text/javascript">
+                              $(function () {
+                                  $('#datetimepicker').datetimepicker({
+                                    format: 'DD/MM/YYYY'
+                                  });
+                              });
+                          </script>
+                      </div>
+                      
                       <%= f.label :empresaNacional,"Es empresa Nacional? "%>
                       <%= select_tag(:empresaNacional, options_for_select([['True', 1], ['False', 2], ['Select one please', 3]], @ClientFound.empresaNacional), {:class => 'form-control'})  %>
                       <%= f.label :pais_origen_id,"PAIS DE ORIGEN:"%>

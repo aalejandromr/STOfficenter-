@@ -67,6 +67,21 @@ class Admin::ClientController < ApplicationController
 	end
 
 	def create
+		#cliente = params[:client]
+		#fecha = DateTime.new(cliente[:fecha_de_constitucion])
+		
+		#@date = 
+		#I18n.locale = :es
+		#prueba = l("03/11/2017".to_date, format: '%A %d de %B, hello %Y') 
+		#day = I18n.t l(cliente[:fecha_de_constitucion].to_date, format: '%A')
+		#day_number = l(cliente[:fecha_de_constitucion].to_date, format: '%d')
+		#month = I18n.t l(cliente[:fecha_de_constitucion].to_date, format: '%B')
+		#year = l(cliente[:fecha_de_constitucion].to_date, format: '%Y')
+		#fecha = "#{day} #{day_number} de #{month} del #{year}"
+		#abort(fecha.to_s)
+		#l @item.created_at, :format => "%b %e, %Y", :locale => 'en'
+		#"03/11/2017".to_date.strftime("%A")
+		#abort()
 		cliente = params[:client]
 		result = Client.create(
 			nombre: cliente[:nombre],  
@@ -85,6 +100,7 @@ class Admin::ClientController < ApplicationController
 			domicilio_fiscal: cliente[:domicilio_fiscal],
 			registro_fiscal: cliente[:registro_fiscal],
 			rec_id: cliente[:rec_id],
+			sector_economico: cliente[:sector_economico],
 			status: true)
 
 		contact = params[:contact]   

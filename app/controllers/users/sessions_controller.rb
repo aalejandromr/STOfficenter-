@@ -16,7 +16,7 @@ class Users::SessionsController < Devise::SessionsController
       sign_in user
       if user_signed_in?
         if user.rol_id == 1
-          redirect_to "/admin/superadmin"
+          redirect_to superadmin_superadmin_index_path
         elsif user.rol_id == 2
           redirect_to "/admin/admin"
         else

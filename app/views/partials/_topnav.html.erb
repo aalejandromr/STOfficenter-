@@ -38,7 +38,7 @@
           </a>
           <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
             <% @user = User.where(RequestResetPassword: true, Supervisor: current_user.id).count %>
-            <% if @user %>
+            <% if @user != 0 %>
             <li>
               <a>
                       <span>
@@ -51,13 +51,24 @@
               </a>
             </li>
             <% end %>
+
+            <% @approved = Contract.where(status: 1, requester_id: current_user.id).count %>
+            <% if @approved != 0 %>
             <li>
-              <div class="text-center">
-                <a>
-                  <strong>See All Alerts</strong>
-                  <i class="fa fa-angle-right"></i>
-                </a>
-              </div>
+              <a>
+                      <span>
+                                        <span>John Smith</span>
+                      <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                                        <a href="<%=all_admin_contract_index_path%>"> <span> Tienes <%= @approved %> contractos(s) aprobados. </span> </a>
+                                    </span>
+              </a>
+            </li>
+            <% end %>
+
+
+            <li>
             </li>
           </ul>
         </li>

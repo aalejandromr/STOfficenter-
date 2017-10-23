@@ -75,7 +75,24 @@
                       <input class="form-control" placeholder="Giro de la Empresa" type="text" name="client[giroEmpresa]" id="client_giroEmpresa">
                       
                       <label for="client_sector_economico">Sector economico:</label>
-                      <input class="form-control" placeholder="Sector economico al que pertenece la empresa" type="text" name="client[sector_economico]" id="client_sector_economico">
+
+                      <select name="client[sector_economico]" class="form-control">
+                        <option value="Agricultura">
+                          Agricultura
+                        </option>
+
+                        <option value="Ganaderia">
+                          Ganaderia
+                        </option>
+
+                        <option value="Tecnologia">
+                          Tecnologia
+                        </option>
+                        <option value="Selecciona Uno" selected="selected">
+                          Selecciona uno
+                        </option>
+                      </select>
+
                       <label for="client_nombre_comercial">Nombre Comercial:</label>
                       <input class="form-control" placeholder="Nombre Comercial" type="text" name="client[nombre_comercial]" id="client_nombre_comercial">
                       <label for="client_nit">No NIT Empresa:</label>
@@ -84,13 +101,34 @@
                       <label for="client_cantidadEmpleados">CANTIDAD DE EMPLEADOS:</label>
                       <input class="form-control" placeholder="Cantidad de Empleados" type="number" name="client[cantidadEmpleados]" id="client_cantidadEmpleados">
                       <label for="client_fecha_de_constitucion">FECHA DE CONSTITUCION DE LA EMPRESA:</label>
-                      <input class="form-control" type="date" name="client[fecha_de_constitucion]" id="client_fecha_de_constitucion">
+                      <div class="container">
+                      <div class="row">
+                          <div class='col-sm-12'>
+                              <div class="form-group">
+                                  <div class='input-group date' id='datetimepicker'>
+                                      <input type='text' class="form-control" name="client[fecha_de_constitucion]" id="client_fecha_de_constitucion"/>
+                                      <span class="input-group-addon">
+                                          <span class="glyphicon glyphicon-calendar"></span>
+                                      </span>
+                                  </div>
+                              </div>
+                          </div>
+                          <script type="text/javascript">
+                              $(function () {
+                                  $('#datetimepicker').datetimepicker({
+                                    format: 'DD/MM/YYYY'
+                                  });
+                              });
+                          </script>
+                      </div>
+                    </div>
                       <label for="client_empresaNacional">Es empresa Nacional? </label>
-                      <select name="empresaNacional" id="empresaNacional" class="form-control"><option value="1">True</option>
-                      <option value="2">False</option>
-                      <option selected="selected" value="3">Select one please</option></select>
-                                            <label for="client_pais_origen_id">PAIS DE ORIGEN:</label>
-                                            <select class="form-control" name="paisorigen[pais_origen_id]" id="paisorigen_pais_origen_id"><option value="">Please select</option>
+                      <select name="empresaNacional" id="empresaNacional" class="form-control"><option value="1">Si</option>
+                      <option value="2">No</option>
+                      <option selected="selected" value="3">Select one please</option>
+                      </select>
+                    <label for="client_pais_origen_id">PAIS DE ORIGEN:</label>
+                    <select class="form-control" name="paisorigen[pais_origen_id]" id="paisorigen_pais_origen_id"><option value="0">Please select</option>
                       <option value="1">Afghanistan</option>
                       <option value="2">Albania</option>
                       <option value="3">Algeria</option>
@@ -496,8 +534,8 @@
                       <label for="client_representante_legal">Representante Legal:</label>
                                             <input class="form-control" placeholder="Representante Legal" type="text" name="client[representante_legal]" id="client_representante_legal">      
                                             <label for="client_oficina_actual">Posee Oficina?</label>
-                                            <select name="oficina_actual" id="oficina_actual" class="form-control"><option value="1">True</option>
-                      <option value="2">False</option>
+                                            <select name="oficina_actual" id="oficina_actual" class="form-control"><option value="1">Si</option>
+                      <option value="2">No</option>
                       <option selected="selected" value="3">Select one please</option></select>
                                             <label for="client_correo">Correo Empresarial:</label>
                                             <input class="form-control" placeholder="Correo Empresarial" type="text" name="client[correo]" id="client_correo">
@@ -506,7 +544,7 @@
                                             <label for="client_pagina_web">Pagina Web Empresarial:</label>
                                             <input class="form-control" placeholder="Pagina Web Empresarial" type="text" name="client[pagina_web]" id="client_pagina_web">
                                             <label for="client_domicilio_fiscal">Domicilio Fiscal:</label>
-                                            <input required="required" class="form-control" placeholder="Domicilio Fiscal" type="text" name="client[domicilio_fiscal]" id="client_domicilio_fiscal">
+                                            <input required="required" class="form-control" placeholder="Domicilio Fiscal" type="text" name="client[domicilio_fiscal]" id="client_domicilio_fiscal" minlength="15">
                                             <label for="client_registro_fiscal">No NRF:</label>
                                             <input class="form-control" placeholder="NRF" required="required" type="text" name="client[registro_fiscal]" id="client_registro_fiscal">
                                           </div>
@@ -519,16 +557,16 @@
                                               <label for="contact_rec_id">SERIAL:</label>
                                               <input readonly="readonly" class="form-control" value=<%= "CNT0000000#{Contact.count + 1}"%> type="text" name="contact[rec_id]" id="contact_rec_id">
                                               <label for="contact_first_name">Primer Nombre:</label>
-                                              <input required="required" class="form-control" placeholder="Primer Nombre" type="text" name="contact[first_name]" id="contact_first_name">
+                                              <input required="required" class="form-control" placeholder="Primer Nombre" type="text" name="contact[first_name]" id="contact_first_name" data-inputmask-regex="[a-zA-Z ]*">
                                               <label id="contact_first_name-error" class="error" style="display: none;" for="contact_first_name">This field is required.</label>
                                               <label for="contact_middle_name">Segundo Nombre:</label>
-                                              <input required="required" class="form-control" placeholder="Segundo Nombre" type="text" name="contact[middle_name]" id="contact_middle_name">
+                                              <input required="required" class="form-control" placeholder="Segundo Nombre" type="text" name="contact[middle_name]" id="contact_middle_name" data-inputmask-regex="[a-zA-Z ]*">
                                               <label id="contact_middle_name-error" class="error" style="display: none;" for="contact_middle_name">This field is required.</label>
                                               <label for="contact_last_name">Primer Apellido:</label>
-                                              <input required="required" class="form-control" placeholder="Primer Apellido" type="text" name="contact[last_name]" id="contact_last_name">
+                                              <input required="required" class="form-control" placeholder="Primer Apellido" type="text" name="contact[last_name]" id="contact_last_name" data-inputmask-regex="[a-zA-Z ]*">
                                               <label id="contact_last_name-error" class="error" style="display: none;" for="contact_last_name">This field is required.</label>
                                               <label for="contact_sur_name">Segundo Apellido:</label>
-                                              <input required="required" class="form-control" placeholder="Segundo Apellido" type="text" name="contact[sur_name]" id="contact_sur_name">
+                                              <input required="required" class="form-control" placeholder="Segundo Apellido" type="text" name="contact[sur_name]" id="contact_sur_name" data-inputmask-regex="[a-zA-Z ]*">
                                               <label id="contact_sur_name-error" class="error" style="display: none;" for="contact_sur_name">This field is required.</label>
                                               <label for="contact_dui">DUI:</label>
                                               <input class="form-control" placeholder="DUI" type="text" name="contact[dui]" id="contact_dui">
@@ -566,6 +604,16 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
+    $('#empresaNacional').on('change', function() {
+      //alert( this.value );
+      if(this.value === "1"){ 
+        //console.log("Aquiii");
+        $("#paisorigen_pais_origen_id").val("54");
+      } 
+      else {
+        $("#paisorigen_pais_origen_id").val("0"); 
+      }
+    });
     $(".error").hide();
   $("#new_client").validate({
     invalidHandler: function(event, validator) {
@@ -659,7 +707,25 @@
       $("#datos_contacto").css({"visibility":"hidden","position":"fixed"});
       $("#datos_empresa").removeAttr("style");
     });
-  
+    
+     
+  });
+
+
+  $("#contact_first_name").inputmask('Regex', {
+    casing: "upper"
+  });
+
+  $("#contact_middle_name").inputmask('Regex', {
+    casing: "upper"
+  });
+
+  $("#contact_last_name").inputmask('Regex', {
+    casing: "upper"
+  });
+
+  $("#contact_sur_name").inputmask('Regex', {
+    casing: "upper"
   });
 
 
