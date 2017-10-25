@@ -2,7 +2,7 @@
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3> CONTACT - <%= @ContactFound.rec_id %></h3>
+        <h3> CONTACTO - <%= @ContactFound.rec_id %></h3>
       </div>
 
       <div class="title_right">
@@ -23,16 +23,16 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel" style="min-height: 600px;">
           <div class="x_title">
-            <h2>Update Client</h2>
+            <h2>Actualizar Cliente</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Settings 1</a>
+                  <li><a href="#">Ajuste 1</a>
                   </li>
-                  <li><a href="#">Settings 2</a>
+                  <li><a href="#">Ajuste 2</a>
                   </li>
                 </ul>
               </li>
@@ -61,13 +61,13 @@
                       <%= f.label :rec_id, "SERIAL:"%>
                       <%= f.text_field :rec_id,:readonly => true, class: 'form-control', value: @ContactFound.rec_id%>
                       <%= f.label :first_name,"Primer Nombre:"%>
-                      <%= f.text_field :first_name ,  required: true, class: 'form-control', placeholder: 'Primer Nombre' %>
+                      <%= f.text_field :first_name ,  required: true, class: 'form-control', placeholder: 'Primer Nombre', :data => { "inputmask-regex" => "[a-zA-Z ]*"} %>
                       <%= f.label :middle_name,"Seguno Nombre:"%>
-                      <%= f.text_field :middle_name ,  required: true, class: 'form-control', placeholder: 'Segundo Nombre' %>
+                      <%= f.text_field :middle_name ,  required: true, class: 'form-control', placeholder: 'Segundo Nombre', :data => { "inputmask-regex" => "[a-zA-Z ]*"} %>
                       <%= f.label :sur_name,"Primer Apellido:"%>
-                      <%= f.text_field :sur_name ,  required: true, class: 'form-control', placeholder: 'Primer Apellido' %>
+                      <%= f.text_field :sur_name ,  required: true, class: 'form-control', placeholder: 'Primer Apellido', :data => { "inputmask-regex" => "[a-zA-Z ]*"} %>
                       <%= f.label :last_name,"Segundo Apellido:"%>
-                      <%= f.text_field :last_name ,  required: true, class: 'form-control', placeholder: 'Segundo Apellido' %>
+                      <%= f.text_field :last_name ,  required: true, class: 'form-control', placeholder: 'Segundo Apellido', :data => { "inputmask-regex" => "[a-zA-Z ]*"} %>
                       <%= f.label :phone_contact,"No Telefonico:"%>
                       <%= f.text_field :phone_contact, class: 'form-control', placeholder: 'Numero Telefonico'%>
                       <%= f.label :mobil_contact, "No Celular:"%>
@@ -77,7 +77,7 @@
                       <%= f.label :nit,"No NIT:"%>
                       <%= f.text_field :nit, class: 'form-control', placeholder: 'NIT', required: true%>
                       <%= f.label :dui,"DUI:"%>
-                      <%= f.number_field :dui, class: 'form-control', placeholder: 'DUI'%>
+                      <%= f.text_field :dui, class: 'form-control', placeholder: 'DUI'%>
                       <%= f.submit "Modificar", class: 'btn btn-primary submit' %>
                     <% end %>
                     </div>
@@ -92,3 +92,140 @@
     </div>
   </div>
 </div>
+
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    $('#empresaNacional').on('change', function() {
+      //alert( this.value );
+      if(this.value === "1"){ 
+        //console.log("Aquiii");
+        $("#paisorigen_pais_origen_id").val("54");
+      } 
+      else {
+        $("#paisorigen_pais_origen_id").val("0"); 
+      }
+    });
+    $(".error").hide();
+  $("#new_client").validate({
+    invalidHandler: function(event, validator) {
+    // 'this' refers to the form
+      //console.log(validator);
+      //console.log(event);
+      var errors = validator.numberOfInvalids();
+        if (errors) {
+          var message = errors == 1
+            ? 'No estas llenando un campo requerido'
+            : 'No has llenado ' + errors + ' campos. Asegurate de revisar las alertar';
+          toastr.error('Tienes algunos campos requeridos incompletos, asegurate de llenar el formulario correctamente.', 'Error!');
+          //console.log(message);
+
+          //$(".error").show();
+        }   else {
+          //$(".error").hide();
+        }
+      },
+      rules: {
+        client: {
+          required: true,
+        }
+      }
+  });
+  $("#client_nombre").inputmask('Regex', {
+    casing: "upper"
+  });
+    $("#client_nit").inputmask("99999999-9", 
+      { 
+        "onincomplete":  function(){ 
+          toastr.error('Este campo tiene que ser algo asi: ########-#.', 'Error!', {timeOut: 3000})
+        } 
+      });
+    $("#contact_dui").inputmask("99999999-9", 
+      { 
+        "onincomplete":  function(){ 
+          toastr.error('Este campo tiene que ser algo asi: ########-#.', 'Error!', {timeOut: 3000})
+        } 
+      });
+
+    $("#contact_nit").inputmask("9999-999999-999-9", { 
+        "onincomplete":  function(){ 
+          toastr.error('Este campo tiene que ser algo asi: ########-#.', 'Error!', {timeOut: 3000})
+        } 
+      });    
+    
+    $("#client_registro_fiscal").inputmask("999999-9", 
+      { 
+        "onincomplete":  function(){ 
+          toastr.error('Este campo tiene que ser algo asi: ########-#.', 'Error!', {timeOut: 3000})
+        } 
+      });
+    $("#client_telefono").inputmask("9999-9999", 
+      { 
+        "onincomplete":  function(){ 
+          toastr.error('Este campo tiene que ser algo asi: ########-#.', 'Error!', {timeOut: 3000})
+        } 
+      });
+    
+    $("#contact_mobil_contact").inputmask("9999-9999", { 
+        "onincomplete":  function(){ 
+          toastr.error('Este campo tiene que ser algo asi: ########-#.', 'Error!', {timeOut: 3000})
+        } 
+      });
+    $("#contact_phone_contact").inputmask("9999-9999", { 
+        "onincomplete":  function(){ 
+          toastr.error('Este campo tiene que ser algo asi: ####-####.', 'Error!', {timeOut: 3000})
+        } 
+      });
+
+    
+    Inputmask("url").mask("#client_pagina_web");
+    Inputmask("email").mask("#client_correo");
+    Inputmask("email").mask("#contact_email");
+
+    
+    $("#client_nit").inputmask("9999-999999-999-9", { 
+        "onincomplete":  function(){ 
+          toastr.error('Este campo tiene que ser algo asi: ########-#.', 'Error!', {timeOut: 3000})
+        } 
+      });
+
+    $("#datos_contacto").css({"visibility":"hidden","position":"fixed"});
+    $("a[href='#datos_contacto']").click(function(){
+      $("#datos_contacto").removeAttr("style");
+      $("#datos_empresa").css({"visibility":"hidden","position":"fixed"});
+    });
+
+    $("a[href='#datos_empresa']").click(function(){
+      $("#datos_contacto").css({"visibility":"hidden","position":"fixed"});
+      $("#datos_empresa").removeAttr("style");
+    });
+    
+     
+  });
+
+
+  $("#contact_first_name").inputmask('Regex', {
+    casing: "upper"
+  });
+
+  $("#contact_middle_name").inputmask('Regex', {
+    casing: "upper"
+  });
+
+  $("#contact_last_name").inputmask('Regex', {
+    casing: "upper"
+  });
+
+  $("#contact_sur_name").inputmask('Regex', {
+    casing: "upper"
+  });
+
+
+</script>
+
+
+
+
+
+

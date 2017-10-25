@@ -31,9 +31,9 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Settings 1</a>
+                  <li><a href="#">Ajuste 1</a>
                   </li>
-                  <li><a href="#">Settings 2</a>
+                  <li><a href="#">Ajuste 2</a>
                   </li>
                 </ul>
               </li>
@@ -46,10 +46,10 @@
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item active">
-              <a class="nav-link" data-toggle="tab" href="#see_all_active" role="tab"> Active(s)</a>
+              <a class="nav-link" data-toggle="tab" href="#see_all_active" role="tab"> Activo(s)</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#see_all_inactive" role="tab">Inactive(s)</a>
+              <a class="nav-link" data-toggle="tab" href="#see_all_inactive" role="tab">Inactivo(s)</a>
             </li>
           </ul>
 
@@ -104,14 +104,14 @@
                 data: { id : elementId },    // multiple data sent using ajax
                 success: function (data) {
                     swal(
-                      'Actived!',
+                      'Activado!',
                       'Contrato Aprobado',
                       'success'
                     );
                 },
                 error: function (error, ajaxContext) {
                   swal(
-                  'Fracaso!',
+                  'Error!',
                   'Algo salio mal.',
                   'error'
                   )

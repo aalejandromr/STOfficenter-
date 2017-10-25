@@ -3,7 +3,7 @@
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3> CLIENT - <%= @ClientFound.rec_id %></h3>
+        <h3> CLIENTE - <%= @ClientFound.rec_id %></h3>
       </div>
 
       <div class="title_right">
@@ -11,7 +11,7 @@
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
-                              <button class="btn btn-default" type="button">Go!</button>
+                              <button class="btn btn-default" type="button"></button>
                           </span>
           </div>
         </div>
@@ -24,16 +24,16 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel" style="min-height: 600px;">
           <div class="x_title">
-            <h2>Update Client</h2>
+            <h2>Actualizar Cliente</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Settings 1</a>
+                  <li><a href="#">Ajustes 1</a>
                   </li>
-                  <li><a href="#">Settings 2</a>
+                  <li><a href="#">Ajustes 2</a>
                   </li>
                 </ul>
               </li>
@@ -70,8 +70,24 @@
                       <%= f.text_field :giroEmpresa, class: 'form-control', placeholder: 'Giro de la Empresa'%>
                       <%= f.label :nombre_comercial, "Nombre Comercial:"%>
                       <%= f.text_field :nombre_comercial , class: 'form-control', placeholder: 'Nombre Comercial' %>
-                      <%= f.label :sector_economico,"Sector economico:"%>
-                      <%= f.text_field :sector_economico, class: 'form-control', placeholder: 'Sector economico al que pertenece la empresa'%>
+                      <label for="client_sector_economico">Sector economico:</label>
+
+                      <select name="client[sector_economico]" class="form-control">
+                        <option value="Agricultura">
+                          Agricultura
+                        </option>
+
+                        <option value="Ganaderia">
+                          Ganaderia
+                        </option>
+
+                        <option value="Tecnologia">
+                          Tecnologia
+                        </option>
+                        <option value="Selecciona Uno" selected="selected">
+                          Selecciona uno
+                        </option>
+                      </select>
                       <%= f.label :nit,"No NIT Empresa:"%>
                       <%= f.text_field :nit, class: 'form-control', placeholder: 'NIT', required: true%>
                       
@@ -128,15 +144,15 @@
                     <thead>
                       <tr>
                         <th>REC ID</th>
-                        <th>First Name</th>
-                        <th>Middle Name</th>
-                        <th>Surname</th>
-                        <th>Last Name</th> 
-                        <th>Phone Contact</th>
-                        <th>Mobil Contact</th>
-                        <th>Email</th>
+                        <th>Primer Nombre</th>
+                        <th>Segundo Nombre</th>
+                        <th>Primer Apellido</th>
+                        <th>Segundo Apellido</th> 
+                        <th>Telefono de Contacto</th>
+                        <th>Telefono Celular</th>
+                        <th>Correo</th>
                         <th>Dui</th>
-                        <th>Actions</th>
+                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>

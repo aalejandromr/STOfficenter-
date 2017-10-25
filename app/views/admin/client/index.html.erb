@@ -3,7 +3,7 @@
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>ALL CLIENTS</h3>
+        <h3>Todos los clientes</h3>
       </div>
 
       <div class="title_right">
@@ -24,16 +24,16 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel" style="height:600px;">
           <div class="x_title">
-            <h2>You have <%= "#{Client.count}"%> Client(s)</h2>
+            <h2>Tienes <%= "#{Client.count}"%> Cliente(s)</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Settings 1</a>
+                  <li><a href="#">Ajustes 1</a>
                   </li>
-                  <li><a href="#">Settings 2</a>
+                  <li><a href="#">Ajustes 2</a>
                   </li>
                 </ul>
               </li>
@@ -46,10 +46,10 @@
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item active">
-              <a class="nav-link" data-toggle="tab" href="#see_all_active" role="tab"> Active(s)</a>
+              <a class="nav-link" data-toggle="tab" href="#see_all_active" role="tab"> Activo(s)</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#see_all_inactive" role="tab">Inactive(s)</a>
+              <a class="nav-link" data-toggle="tab" href="#see_all_inactive" role="tab">Inactivo(s)</a>
             </li>
           </ul>
 
@@ -66,7 +66,7 @@
                         <th>Representante Legal</th>
                         <th>Correo</th>
                         <th>Telefono</th>
-                        <th>Actions</th>
+                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -105,7 +105,7 @@
                         <th>Representante Legal</th>
                         <th>Correo</th>
                         <th>Telefono</th>
-                        <th>Actions</th>
+                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -197,13 +197,13 @@
       $('a.inactive_client').on('click', function(){
         var elementId = this.getAttribute('id');
         swal({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
+          title: 'Estas seguro?',
+          text: "No seras capaz de revertir esto!",
           type: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!'
+          confirmButtonText: 'Si, borrar!'
         }).then(function () {
             $.ajax({
                 type: "DELETE",
@@ -212,16 +212,16 @@
                 data: { id : elementId },    // multiple data sent using ajax
                 success: function (data) {
                     swal(
-                'Inactived!',
-                'Your client has been inactived.',
+                'Desactivado!',
+                'Tu cliente ha sido Desactivado.',
                 'success'
               );
               console.log(data);
                 },
                 error: function (error, ajaxContext) {
                   swal(
-                'Fracaso!',
-                'Your file has been deleted.',
+                'Error!',
+                'Error.',
                 'error'
               )
               }
@@ -233,13 +233,13 @@
       $('a.active_client').on('click', function(){
         var elementId = this.getAttribute('id');
         swal({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
+          title: 'Estas seguro?',
+          text: "No seras capaz de revertir esto!",
           type: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!'
+          confirmButtonText: 'Si, borralo!'
         }).then(function () {
             $.ajax({
                 type: "DELETE",
@@ -248,16 +248,16 @@
                 data: { id : elementId },    // multiple data sent using ajax
                 success: function (data) {
                     swal(
-                'Actived!',
-                'Your client was successfully active.',
+                'Activado!',
+                'Tu cliente ha sido activado exitosamente.',
                 'success'
               );
               console.log(data);
                 },
                 error: function (error, ajaxContext) {
                   swal(
-                'Fracaso!',
-                'Your file has been deleted.',
+                'Error!',
+                'Error.',
                 'error'
               )
               }

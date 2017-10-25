@@ -4,7 +4,7 @@
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>CREATE NEW CLIENT</h3>
+        <h3>Crear nuevo cliente</h3>
       </div>
 
       <div class="title_right">
@@ -25,16 +25,16 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel" style="min-height: 600px;">
           <div class="x_title">
-            <h2>New Client</h2>
+            <h2>Nuevo cliente</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Settings 1</a>
+                  <li><a href="#">Ajuste 1</a>
                   </li>
-                  <li><a href="#">Settings 2</a>
+                  <li><a href="#">Ajuste 2</a>
                   </li>
                 </ul>
               </li>
@@ -70,7 +70,7 @@
                       <input readonly="readonly" class="form-control" value=<%=  "CLNT0000000#{Client.count + 1}" %> type="text" name="client[rec_id]" id="client_rec_id">
                       <label for="client_nombre">Nombre Empresa:</label>
                       <input required="required" class="form-control" placeholder="Nombre Empresa" data-inputmask-regex="[a-zA-Z ]*" type="text" name="client[nombre]" id="client_nombre">
-                      <label id="client_nombre-error" class="error" style="display: none;" for="client_nombre">This field is required.</label>
+                      <label id="client_nombre-error" class="error" style="display: none;" for="client_nombre">Este campo es requerido.</label>
                       <label for="client_giroEmpresa">GIRO DE LA EMPRESA:</label>
                       <input class="form-control" placeholder="Giro de la Empresa" type="text" name="client[giroEmpresa]" id="client_giroEmpresa">
                       
@@ -97,7 +97,7 @@
                       <input class="form-control" placeholder="Nombre Comercial" type="text" name="client[nombre_comercial]" id="client_nombre_comercial">
                       <label for="client_nit">No NIT Empresa:</label>
                       <input class="form-control" placeholder="NIT" required="required" type="text" value="" name="client[nit]" id="client_nit">
-                      <label id="client_nit-error" class="error" style="display: none;" for="client_nit">This field is required.</label>
+                      <label id="client_nit-error" class="error" style="display: none;" for="client_nit">Este campo es requerido.</label>
                       <label for="client_cantidadEmpleados">CANTIDAD DE EMPLEADOS:</label>
                       <input class="form-control" placeholder="Cantidad de Empleados" type="number" name="client[cantidadEmpleados]" id="client_cantidadEmpleados">
                       <label for="client_fecha_de_constitucion">FECHA DE CONSTITUCION DE LA EMPRESA:</label>
@@ -125,7 +125,7 @@
                       <label for="client_empresaNacional">Es empresa Nacional? </label>
                       <select name="empresaNacional" id="empresaNacional" class="form-control"><option value="1">Si</option>
                       <option value="2">No</option>
-                      <option selected="selected" value="3">Select one please</option>
+                      <option selected="selected" value="3">Selecciona uno por favor</option>
                       </select>
                     <label for="client_pais_origen_id">PAIS DE ORIGEN:</label>
                     <select class="form-control" name="paisorigen[pais_origen_id]" id="paisorigen_pais_origen_id"><option value="0">Please select</option>
@@ -536,7 +536,7 @@
                                             <label for="client_oficina_actual">Posee Oficina?</label>
                                             <select name="oficina_actual" id="oficina_actual" class="form-control"><option value="1">Si</option>
                       <option value="2">No</option>
-                      <option selected="selected" value="3">Select one please</option></select>
+                      <option selected="selected" value="3">Selecciona uno por favor</option></select>
                                             <label for="client_correo">Correo Empresarial:</label>
                                             <input class="form-control" placeholder="Correo Empresarial" type="text" name="client[correo]" id="client_correo">
                                             <label for="client_telefono">Telefono:</label>
@@ -558,26 +558,26 @@
                                               <input readonly="readonly" class="form-control" value=<%= "CNT0000000#{Contact.count + 1}"%> type="text" name="contact[rec_id]" id="contact_rec_id">
                                               <label for="contact_first_name">Primer Nombre:</label>
                                               <input required="required" class="form-control" placeholder="Primer Nombre" type="text" name="contact[first_name]" id="contact_first_name" data-inputmask-regex="[a-zA-Z ]*">
-                                              <label id="contact_first_name-error" class="error" style="display: none;" for="contact_first_name">This field is required.</label>
+                                              <label id="contact_first_name-error" class="error" style="display: none;" for="contact_first_name">Este campo es requerido.</label>
                                               <label for="contact_middle_name">Segundo Nombre:</label>
                                               <input required="required" class="form-control" placeholder="Segundo Nombre" type="text" name="contact[middle_name]" id="contact_middle_name" data-inputmask-regex="[a-zA-Z ]*">
-                                              <label id="contact_middle_name-error" class="error" style="display: none;" for="contact_middle_name">This field is required.</label>
+                                              <label id="contact_middle_name-error" class="error" style="display: none;" for="contact_middle_name">Este campo es requerido.</label>
                                               <label for="contact_last_name">Primer Apellido:</label>
                                               <input required="required" class="form-control" placeholder="Primer Apellido" type="text" name="contact[last_name]" id="contact_last_name" data-inputmask-regex="[a-zA-Z ]*">
-                                              <label id="contact_last_name-error" class="error" style="display: none;" for="contact_last_name">This field is required.</label>
+                                              <label id="contact_last_name-error" class="error" style="display: none;" for="contact_last_name">Este campo es requerido.</label>
                                               <label for="contact_sur_name">Segundo Apellido:</label>
                                               <input required="required" class="form-control" placeholder="Segundo Apellido" type="text" name="contact[sur_name]" id="contact_sur_name" data-inputmask-regex="[a-zA-Z ]*">
-                                              <label id="contact_sur_name-error" class="error" style="display: none;" for="contact_sur_name">This field is required.</label>
+                                              <label id="contact_sur_name-error" class="error" style="display: none;" for="contact_sur_name">Este campo es requerido.</label>
                                               <label for="contact_dui">DUI:</label>
                                               <input class="form-control" placeholder="DUI" type="text" name="contact[dui]" id="contact_dui">
                                               <label for="contact_nit">NIT:</label>
                                               <input class="form-control" placeholder="NIT" type="text" name="contact[nit]" id="contact_nit">
                                               <label for="contact_phone_contact">Telefono de Contacto:</label>
                                               <input required="required" class="form-control" placeholder="Telefono de Contacto" type="text" name="contact[phone_contact]" id="contact_phone_contact">
-                                              <label id="client_dui-error" class="error fade in" for="contact_phone_contact" style="display: none;">This field is required.</label>
+                                              <label id="client_dui-error" class="error fade in" for="contact_phone_contact" style="display: none;">Este campo es requerido.</label>
                                               <label for="contact_mobil_contact">No Celular:</label>
                                               <input class="form-control" placeholder="Numero de Celular" required="required" type="text" name="contact[mobil_contact]" id="contact_mobil_contact">
-                                              <label id="client_nit-error" class="error fade in" for="contact_mobil_contact" style="display: none;">This field is required.</label>
+                                              <label id="client_nit-error" class="error fade in" for="contact_mobil_contact" style="display: none;">Este campo es requerido.</label>
                                               <label for="contact_email">Correo electronico:</label>
                                               <input class="form-control" placeholder="Correo electronico" type="text" name="contact[email]" id="contact_email">
                                               <label for="contact_position_id">Posicion en la que trabaja:</label>
@@ -623,9 +623,9 @@
       var errors = validator.numberOfInvalids();
         if (errors) {
           var message = errors == 1
-            ? 'You missed 1 field. It has been highlighted'
-            : 'You missed ' + errors + ' fields. They have been highlighted';
-          toastr.error('You have some required fields incompleted, please fullfil the form correctly.', 'Error!');
+            ? 'No estas llenando un campo requerido'
+            : 'No has llenado ' + errors + ' campos. Asegurate de revisar las alertar';
+          toastr.error('Tienes algunos campos requeridos incompletos, asegurate de llenar el formulario correctamente.', 'Error!');
           //console.log(message);
 
           //$(".error").show();
@@ -645,43 +645,43 @@
     $("#client_nit").inputmask("99999999-9", 
       { 
         "onincomplete":  function(){ 
-          toastr.error('This input Must be like ########-#.', 'Error!', {timeOut: 3000})
+          toastr.error('Este campo tiene que ser algo asi: ########-#.', 'Error!', {timeOut: 3000})
         } 
       });
     $("#contact_dui").inputmask("99999999-9", 
       { 
         "onincomplete":  function(){ 
-          toastr.error('This input Must be like ########-#.', 'Error!', {timeOut: 3000})
+          toastr.error('Este campo tiene que ser algo asi: ########-#.', 'Error!', {timeOut: 3000})
         } 
       });
 
     $("#contact_nit").inputmask("9999-999999-999-9", { 
         "onincomplete":  function(){ 
-          toastr.error('This input Must be like ########-#.', 'Error!', {timeOut: 3000})
+          toastr.error('Este campo tiene que ser algo asi: ########-#.', 'Error!', {timeOut: 3000})
         } 
       });    
     
     $("#client_registro_fiscal").inputmask("999999-9", 
       { 
         "onincomplete":  function(){ 
-          toastr.error('This input Must be like ########-#.', 'Error!', {timeOut: 3000})
+          toastr.error('Este campo tiene que ser algo asi: ########-#.', 'Error!', {timeOut: 3000})
         } 
       });
     $("#client_telefono").inputmask("9999-9999", 
       { 
         "onincomplete":  function(){ 
-          toastr.error('This input Must be like ########-#.', 'Error!', {timeOut: 3000})
+          toastr.error('Este campo tiene que ser algo asi: ########-#.', 'Error!', {timeOut: 3000})
         } 
       });
     
     $("#contact_mobil_contact").inputmask("9999-9999", { 
         "onincomplete":  function(){ 
-          toastr.error('This input Must be like ########-#.', 'Error!', {timeOut: 3000})
+          toastr.error('Este campo tiene que ser algo asi: ########-#.', 'Error!', {timeOut: 3000})
         } 
       });
     $("#contact_phone_contact").inputmask("9999-9999", { 
         "onincomplete":  function(){ 
-          toastr.error('This input Must be like ####-####.', 'Error!', {timeOut: 3000})
+          toastr.error('Este campo tiene que ser algo asi: ####-####.', 'Error!', {timeOut: 3000})
         } 
       });
 
@@ -693,7 +693,7 @@
     
     $("#client_nit").inputmask("9999-999999-999-9", { 
         "onincomplete":  function(){ 
-          toastr.error('This input Must be like ########-#.', 'Error!', {timeOut: 3000})
+          toastr.error('Este campo tiene que ser algo asi: ########-#.', 'Error!', {timeOut: 3000})
         } 
       });
 

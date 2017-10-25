@@ -14,10 +14,10 @@ class Admin::ContactController < ApplicationController
 			rec_id: contact[:rec_id],
 			dui: contact[:dui])
 		if result
-			flash[:success] = "Your Contact was successfully created."
+			flash[:success] = "Tu contacto fue creado exitosamente."
 			redirect_to new_admin_client_path
 		else
-			flash[:error] = "Something went wrong, please make sure to fullfil the form correctly."
+			flash[:error] = I18n.t l("wrong_form")
 			redirect_to new_admin_client_path
 		end
 	end
@@ -40,10 +40,10 @@ class Admin::ContactController < ApplicationController
 			:dui => contact[:dui], 
 			:nit => contact[:nit])
 		if result
-			flash[:success] = "Your contact was successfully updated."
+			flash[:success] = "Tu contacto se ha actualizado correctamente."
 			redirect_to admin_client_index_path
 		else
-			flash[:error] = "Something went wrong, please make sure to fullfil the form correctly."
+			flash[:error] = I18n.t l("wrong_form")
 			redirect_to admin_client_index_path
 		end
 	end

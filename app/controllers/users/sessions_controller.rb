@@ -27,7 +27,7 @@ class Users::SessionsController < Devise::SessionsController
       end
     else
       @user = User.new
-      flash[:error] = "Your credentials dont match our registers, please try again."
+      flash[:error] = "Usuario y contraseña no valido, intentalo nuevamente."
     end
     
   end

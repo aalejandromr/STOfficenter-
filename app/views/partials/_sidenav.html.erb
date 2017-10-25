@@ -5,7 +5,7 @@
     <div class="left_col scroll-view">
 
       <div class="navbar nav_title" style="border: 0;">
-        <a href="<%= admin_admin_index_path %>" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
+        <a href="<%= admin_admin_index_path %>" class="site_title"><i class="fa fa-paw"></i> <span>Sistema!</span></a>
       </div>
       <div class="clearfix"></div>
 
@@ -16,7 +16,7 @@
           <%= image_tag "logo.jpg", :class => "img-circle profile_img"  %>
         </div>
         <div class="profile_info">
-          <span>Welcome,</span>
+          <span>Bienvenid@,</span>
           <h2>Jennifer De La O</h2>
         </div>
       </div>
@@ -31,11 +31,11 @@
           <h3>General</h3>
           <ul class="nav side-menu">
             <% if current_user.rol_id == 2 %>
-              <li><a><i class="fa fa-bar-chart-o"></i> Clients <span class="fa fa-chevron-down"></span></a>
+              <li><a><i class="fa fa-bar-chart-o"></i> Clientes <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
-                    <li> <%= link_to('See all', admin_client_index_path, method: :get) %> 
-                    <li><%= link_to('Create New', "#{new_admin_client_path}", method: :get) %> 
-                    <li><%= link_to('All Contracts', "#{all_admin_contract_index_path}", method: :get) %> 
+                    <li> <%= link_to('Ver todos', admin_client_index_path, method: :get) %> 
+                    <li><%= link_to('Crear Nuevo', "#{new_admin_client_path}", method: :get) %> 
+                    <li><%= link_to('Todos los contratos', "#{all_admin_contract_index_path}", method: :get) %> 
                     
                     </li>
                   </ul>

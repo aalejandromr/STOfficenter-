@@ -40,3 +40,6 @@ en:
   October: "Octubre"
   November: "Noviembre"
   December: "Diciembre"
+  wrong_form: "Algo salio mal, por favor asegurate de llenar el formulario correctamente."
+  something_wrong: "Algo salio mal, intentalo de nuevo"
+  not_authorized: "No estas autorizado"

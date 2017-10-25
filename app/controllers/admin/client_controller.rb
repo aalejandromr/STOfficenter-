@@ -58,10 +58,10 @@ class Admin::ClientController < ApplicationController
 			:registro_fiscal => cliente[:registro_fiscal]
 		)
 		if result
-			flash[:success ] = "Your client was successfully created."
+			flash[:success ] = "Tu cliente se ha creado exitosamente."
 			redirect_to new_admin_client_path
 		else
-			flash[:error] = "Something went wrong, please make sure to fullfil the form correctly."
+			flash[:error] = I18n.t l("wrong_form")
 			redirect_to new_admin_client_path
 		end
 	end
@@ -121,7 +121,7 @@ class Admin::ClientController < ApplicationController
 			flash[:success ] = "Tu cliente y su contacto fueron guardados correctamente."
 			redirect_to admin_client_index_path
 		else
-			flash[:error] = "Algo salio mal, intentalo de nuevo."
+			flash[:error] =I18n.t l("something_wrong")
 			redirect_to admin_client_index_path
 		end
 	end
@@ -135,7 +135,7 @@ class Admin::ClientController < ApplicationController
 
 	def authenticate
 		if current_user.rol_id != 2
-			flash[:danger] = "Sorry, you are not authorized."
+			flash[:danger] = I18n.t l("not_authorized")
 			redirect_to(:back)
 		end
 	end

@@ -21,8 +21,8 @@ class Admin::ContractController < ApplicationController
 		#abort()
 		contract = params[:contract]
 		contrato = Contract.find(contract["id"]).update(
-			:servicio_contratado => contract["servicio_contratado"],
-			:centro_de_negocio => contract["centro_de_negocio"],
+			#:servicio_contratado => contract["servicio_contratado"],
+			#:centro_de_negocio => contract["centro_de_negocio"],
 			:condicion => contract["condicion"],
 			:fecha_de_contratacion => contract["fecha_de_contratacion"],
 			:nit_representante_legal => contract["nit_representante_legal"],
@@ -44,7 +44,9 @@ class Admin::ContractController < ApplicationController
 			:parqueosAsignados => contract["parqueosAsignados"],
 			:periodo_facturacion_id => params["Periodo Facturacion"],
 			:status => "pending",
-			:requester_id => current_user.id
+			:requester_id => current_user.id,
+			:fecha_facturacion => contract["fecha_facturacion"],
+			:total_contrato => contract["total_contrato"]
 		)
 
 

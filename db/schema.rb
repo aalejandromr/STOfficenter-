@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171022194510) do
+ActiveRecord::Schema.define(version: 20171025052209) do
 
   create_table "calles", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -112,6 +112,8 @@ ActiveRecord::Schema.define(version: 20171022194510) do
     t.string   "requester",                    limit: 255
     t.integer  "requester_id",                 limit: 4
     t.string   "contract_doc",                 limit: 255
+    t.string   "fecha_facturacion",            limit: 255
+    t.float    "total_contrato",               limit: 24
   end
 
   add_index "contracts", ["client_id"], name: "index_contracts_on_client_id", using: :btree
